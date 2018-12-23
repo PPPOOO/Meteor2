@@ -1,0 +1,61 @@
+﻿[
+    {
+        "id": 1,
+        "name": "击杀史莱姆",
+        "des": "击杀3只史莱姆",
+        "type": "Combat",
+		"npcid":1,
+        "reward": {
+            "coin": 100,
+            "exp": 100
+        }
+    },
+    {
+        "id": 2,
+        "name": "击杀蝙蝠",
+        "des": "击杀5只蝙蝠",
+        "type": "Combat",
+		"npcid":1,
+        "reward": {
+            "coin": 200,
+            "exp": 200
+        }
+    },
+    {
+        "id": 3,
+        "name": "传话",
+        "des": "跟商人对话",
+        "type": "Talk",
+		"startnpcid":1,
+		"npcid":2,
+        "reward": {
+            "coin": 10,
+            "exp": 10
+        }
+    },
+    {
+        "id": 4,
+        "name": "送信",
+        "des": "把这封信送给村民A",
+        "type": "Talk",
+		"startnpcid":1,
+		"npcid":3,
+        "reward": {
+            "coin": 10,
+            "exp": 10
+        }
+    },
+    {
+        "id": 5,
+        "name": "获得苹果",
+        "des": "村民A想要3个苹果",
+        "type": "GetItem",
+		"npcid":3,
+		"itemid":64,
+		"count":3,
+        "reward": {
+            "coin": 30,
+            "exp": 30
+        }
+    }
+]

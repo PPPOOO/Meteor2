@@ -1,0 +1,63 @@
+﻿[
+    {
+        "id": 1,
+        "name": "村长",
+        "map": "Beginniqg",
+        "animation": "NPC_1",
+        "type": "Quest",
+        "hudtext": [
+            {
+                "hudtextid": 1
+            },
+            {
+                "hudtextid": 2
+            }
+        ],
+        "talktext": [
+            {
+                "talkid": 1
+            },
+            {
+                "talkid": 2
+            }
+        ]
+    },
+{
+        "id": 2,
+        "name": "新手商人",
+        "map": "Beginniqg",
+        "animation": "NPC_2",
+        "type": "Shop",
+        "hudtext": [
+            {
+                "hudtextid": 3
+            },
+            {
+                "hudtextid": 4
+            }
+        ],
+        "talktext": [
+            {
+                "talkid": 3
+            },
+            {
+                "talkid": 4
+            }
+        ]
+    },
+{
+        "id": 3,
+        "name": "村民A",
+        "map": "Beginniqg",
+        "animation": "NPC_3",
+        "type": "Normal",
+        "talktext": [
+            {
+                "talkid": 5
+            },
+            {
+                "talkid": 6
+            }
+        ]
+    }
+]
