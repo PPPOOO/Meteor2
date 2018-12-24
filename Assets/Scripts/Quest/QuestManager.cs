@@ -6,9 +6,12 @@ public class QuestManager : MonoSingleton<QuestManager> {
 
 
     public List<Quest> QuestList;
-    public List<Quest> AcceptQuestList = new List<Quest>();//任务
-    public List<Quest> StartQuestList = new List<Quest>();//talk类任务才有
-    public List<Quest> FinishQuestList = new List<Quest>();//
+    public List<QuestItemUI> AcceptQuestList = new List<QuestItemUI>();//任务
+    public List<QuestItemUI> StartQuestList = new List<QuestItemUI>();//talk类任务才有
+    public List<QuestItemUI> FinishQuestList = new List<QuestItemUI>();//
+    public List<QuestItemUI> CanDeleteQuestList = new List<QuestItemUI>();
+
+    public List<QuestItemUI> QuestItemUIsList = new List<QuestItemUI>();
 
     protected override void Awake()
     {
@@ -16,6 +19,22 @@ public class QuestManager : MonoSingleton<QuestManager> {
         ParseQuestInfo();
     }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log(AcceptQuestList.Count);
+            Debug.Log(StartQuestList.Count);
+            Debug.Log(FinishQuestList.Count);
+            Debug.Log(CanDeleteQuestList.Count);
+        }
+    }
+
+    public void UpdateQuestShow()
+    {
+
+    }
 
     public Quest GetQuestByID(int id)
     {
@@ -29,67 +48,92 @@ public class QuestManager : MonoSingleton<QuestManager> {
         return null;
     }
 
-
-    public void AddAcceptQuestList(Quest quest)
+    #region 任务的状态变化监听
+    public void AddAcceptQuestList(QuestItemUI questui)
     {
-        AcceptQuestList.Add(quest);
-        switch (quest.Questtype)
+        AcceptQuestList.Add(questui);
+        switch (questui.Quest.Questtype)
         {
             case Quest.QuestType.Combat:
                 break;
             case Quest.QuestType.Talk:
                 foreach(NPCUI npc in NPCManager.Instance.QuestNPCList)
                 {
-                    if (quest.StartNPCID == npc.ID)
+                    if (questui.Quest.StartNPCID == npc.ID)
                     {
-                        npc.ShowQuestStatusIcon(quest);
+                        npc.ShowQuestStatusIcon(questui);
                     }
                 }
+                questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.StartNPCID).Name);
                 break;
             case Quest.QuestType.GetItem:
+                foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+                {
+                    if (questui.Quest.NPCID == npc.ID)
+                    {
+                        npc.ShowQuestStatusIcon(questui);
+                    }
+                }
+
                 break;
             case Quest.QuestType.Work:
                 break;
         }
     }
-    public void RemoveAcceptQuestList(Quest quest)
+    public void RemoveAcceptQuestList(QuestItemUI questui)
     {
-        AcceptQuestList.Remove(quest);
+        AcceptQuestList.Remove(questui);
     }
 
-    public void AddStartQuestList(Quest quest)
+    public void AddStartQuestList(QuestItemUI questui)
     {
-        StartQuestList.Add(quest);
+        StartQuestList.Add(questui);
+        RemoveAcceptQuestList(questui);
         foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
         {
-            if (quest.NPCID == npc.ID)
+            if (questui.Quest.NPCID == npc.ID)
             {
-                npc.ShowQuestStatusIcon(quest);
+                npc.ShowQuestStatusIcon(questui);
             }
+            
         }
+        questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.NPCID).Name);
 
     }
-    public void RemoveStartQuestList(Quest quest)
+    public void RemoveStartQuestList(QuestItemUI questui)
     {
-        StartQuestList.Remove(quest);
+        StartQuestList.Remove(questui);
     }
 
-    public void AddFinishQuestList(Quest quest)
+    public void AddFinishQuestList(QuestItemUI questui)
     {
-        FinishQuestList.Add(quest);
+        FinishQuestList.Add(questui);
+        RemoveStartQuestList(questui);
         foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
         {
-            if (quest.StartNPCID == npc.ID)
+            if (questui.Quest.StartNPCID == npc.ID)
             {
-                npc.ShowFinishIcon(quest);
+                npc.ShowFinishIcon(questui);
             }
         }
+        questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.StartNPCID).Name + "并拿到报酬");
     }
-    public void RemoveFinishQuestList(Quest quest)
+    public void RemoveFinishQuestList(QuestItemUI questui)
     {
-        FinishQuestList.Remove(quest);
+        FinishQuestList.Remove(questui);
     }
 
+    public void AddCanDeleteQuestList(QuestItemUI questui)
+    {
+        CanDeleteQuestList.Add(questui);
+        RemoveFinishQuestList(questui);
+        
+    }
+    public void RemoveCanDeleteQuestList(QuestItemUI questui)
+    {
+        CanDeleteQuestList.Remove(questui);
+    }
+    #endregion
 
     public void ParseQuestInfo()
     {

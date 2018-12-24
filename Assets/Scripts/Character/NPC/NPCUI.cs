@@ -21,8 +21,8 @@ public class NPCUI :MonoBehaviour
     public bool IsQuestTarget = false;
     public bool IsStartNPC = false;
     public bool IsFinishQuest = false;
-    public List<Quest> NPCQuests = new List<Quest>();
-    public List<Quest> FinishQuestList = new List<Quest>();
+    public List<QuestItemUI> NPCQuestuis = new List<QuestItemUI>();//随机任务的时候 一个npc身上有多种任务(发起人/中间人)方便管理
+    public List<QuestItemUI> FinishQuestuiList = new List<QuestItemUI>();//
 
 
 
@@ -89,11 +89,12 @@ public class NPCUI :MonoBehaviour
             if (NPCTalkPanel.Instance.IsClickFinshQuest)
             {
                 NPCTalkContentPanel.Instance.ShowContent(NPCinfo.Name, "多谢了!");
-                if (FinishQuestList.Count <= 1)
+                if (FinishQuestuiList.Count <= 1)
                 {
                     IsFinishQuest = false;
                 }
-                FinishQuestList.Remove(FinishQuestList[FinishQuestList.Count - 1]);
+                QuestManager.Instance.AddCanDeleteQuestList(FinishQuestuiList[FinishQuestuiList.Count - 1]);
+                FinishQuestuiList.Remove(FinishQuestuiList[FinishQuestuiList.Count - 1]);
                 HideFinishIcon();
                 break;
             }
@@ -102,42 +103,27 @@ public class NPCUI :MonoBehaviour
             {
                 if (IsStartNPC == true)//跑腿任务 发起人
                 {
-                    NPCTalkContentPanel.Instance.ShowContent(NPCinfo.Name, NPCQuests[NPCQuests.Count - 1].Des);
-                    QuestManager.Instance.AddStartQuestList(NPCQuests[NPCQuests.Count - 1]);
-                    //QuestManager.Instance.RemoveAcceptQuestList(NPCQuests[NPCQuests.Count - 1]);
-                    
-                    if(NPCQuests.Count <= 1)
+                    NPCTalkContentPanel.Instance.ShowContent(NPCinfo.Name,"去找"+ NPCManager.Instance.GetNPCByID(NPCQuestuis[NPCQuestuis.Count - 1].Quest.NPCID).Name);
+                    QuestManager.Instance.AddStartQuestList(NPCQuestuis[NPCQuestuis.Count - 1]);
+                    if(NPCQuestuis.Count <= 1)
                     {
                         IsStartNPC = false;
                     }
-                    NPCQuests.Remove(NPCQuests[NPCQuests.Count - 1]);
+                    NPCQuestuis.Remove(NPCQuestuis[NPCQuestuis.Count - 1]);
                     HideQuestIcon();
                 }
                 
                 else
                 {
-                    NPCInfo startnPCInfo = NPCManager.Instance.GetNPCByID(NPCQuests[NPCQuests.Count - 1].StartNPCID);
+                    NPCInfo startnPCInfo = NPCManager.Instance.GetNPCByID(NPCQuestuis[NPCQuestuis.Count - 1].Quest.StartNPCID);
                     NPCTalkContentPanel.Instance.ShowContent(NPCinfo.Name, "哦 我知道了。\n 你回去告诉" + startnPCInfo.Name + "吧。");
-                    if (NPCQuests.Count <= 1)
+                    if (NPCQuestuis.Count <= 1)
                     {
                         IsQuestTarget = false;
                     }
-                    
                     HideQuestIcon();
-                    QuestManager.Instance.AddFinishQuestList(NPCQuests[NPCQuests.Count - 1]);
-                    NPCQuests.Remove(NPCQuests[NPCQuests.Count - 1]);
-                    //foreach (Quest qt in NPCQuests)
-                    //{
-
-                    //    NPCInfo startnPCInfo = NPCManager.Instance.GetNPCByID(qt.StartNPCID);
-                    //    NPCTalkContentPanel.Instance.ShowContent(NPCinfo.Name, "哦 我知道了。\n 你回去告诉" + startnPCInfo.Name + "吧。");
-                    //    IsQuestTarget = false;
-                    //    HideQuestIcon();
-                    //    QuestManager.Instance.AddFinishQuestList(qt);
-
-
-                    //}
-
+                    QuestManager.Instance.AddFinishQuestList(NPCQuestuis[NPCQuestuis.Count - 1]);
+                    NPCQuestuis.Remove(NPCQuestuis[NPCQuestuis.Count - 1]);
                 }
                 
                 break;
@@ -165,12 +151,12 @@ public class NPCUI :MonoBehaviour
     }
 
 
-    public void ShowQuestStatusIcon(Quest quest)
+    public void ShowQuestStatusIcon(QuestItemUI questui)
     {
-        NPCQuests.Add(quest);
-        foreach(Quest qt in NPCQuests)
+        NPCQuestuis.Add(questui);
+        foreach(QuestItemUI qt in NPCQuestuis)
         {
-            if (qt.Questtype == Quest.QuestType.Talk && qt.StartNPCID == ID)
+            if (qt.Quest.Questtype == Quest.QuestType.Talk && qt.Quest.StartNPCID == ID)
             {
                 IsStartNPC = true;
             }
@@ -186,9 +172,9 @@ public class NPCUI :MonoBehaviour
         go.transform.localPosition = Vector3.zero + Vector3.up;
     }
 
-    public void ShowFinishIcon(Quest quest)
+    public void ShowFinishIcon(QuestItemUI questui)
     {
-        FinishQuestList.Add(quest);
+        FinishQuestuiList.Add(questui);
         IsFinishQuest = true;
         GameObject questIconPrefab = Resources.Load<GameObject>("Quest/TargetFinish");
         GameObject go = Instantiate(questIconPrefab, transform, false);

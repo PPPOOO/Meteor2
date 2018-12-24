@@ -8,9 +8,9 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
     public int ID;
     private Text Name;
     private Image TypeIcon;
-    private Text Des;
-    private Text Reward;
-    private Quest Quest;
+    public Text Des;
+    public Text Reward;
+    public Quest Quest;
 
 
     public void SetID(int id)
@@ -26,6 +26,10 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
         TypeIcon.sprite = Quest.TypeIcon;
         Des.text = Quest.Des;
         Reward.text = Quest.QuestRewards.Coin + "金币  " + Quest.QuestRewards.Exp + "经验";
+        if(transform.parent.name== "QuestContent")
+        {
+            QuestManager.Instance.QuestItemUIsList.Add(this);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -47,6 +51,12 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
 
 
 
+    public void UpdateShowDes(string des)
+    {
+
+        Des.text = des;
+    }
+
     IEnumerator AcceptQuestConfirm(int id)
     {
         while (1 > 0)
@@ -54,9 +64,8 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
             yield return new WaitForSeconds(0.05f);
             if (ConfirmPanel.Instance.IsClickOK)
             {
-                QuestManager.Instance.AddAcceptQuestList(Quest);
-                
-                Destroy(gameObject);
+                QuestManager.Instance.AddAcceptQuestList(this);
+                transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform.Find("NoSlotPanel/QuestPanel/Scroll View/Viewport/QuestContent/"), false);   
                 break;
             }
             if (ConfirmPanel.Instance.IsClickCancel)

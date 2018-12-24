@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public enum GameEventType
 {
     Null,
-    NewDay
+    NewDay,
+    ItemGet
 }
 public class GameEventManager : MonoSingleton<GameEventManager>
 {
@@ -17,6 +18,8 @@ public class GameEventManager : MonoSingleton<GameEventManager>
     {
         base.Awake();
     }
+
+ 
 
     private IGameEventSubject GetGameEvent(GameEventType eventType)
     {

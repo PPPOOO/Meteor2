@@ -76,7 +76,9 @@
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\GameEvent\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Observes\IGameEventObserves.cs" />
+    <Compile Include="Assets\Scripts\GameEvent\Observes\ItemObservesQuestManager.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Subject\IGameEventSubject.cs" />
+    <Compile Include="Assets\Scripts\GameEvent\Subject\ItemGetSubject.cs" />
     <Compile Include="Assets\Scripts\Item\Consumable.cs" />
     <Compile Include="Assets\Scripts\Item\Equipment.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />

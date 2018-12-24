@@ -22,44 +22,25 @@ public class QuestPanel : BasePanel<QuestPanel>
     {
         base.Show();
         UpdateQuestShow();
-
-
+        
     }
 
 
     public void UpdateQuestShow()
     {
-        if (QuestManager.Instance.AcceptQuestList.Count == 0)
+        if (QuestManager.Instance.AcceptQuestList.Count == 0&& QuestManager.Instance.StartQuestList.Count==0&& QuestManager.Instance.FinishQuestList.Count==0)
         {
             NoQuestText.gameObject.SetActive(true);
         }
         else
         {
             NoQuestText.gameObject.SetActive(false);
-            foreach (Quest quest in QuestManager.Instance.AcceptQuestList)
-            {
-                if (ShowQuestLsit.Contains(quest)) continue;
-                GameObject go = Instantiate(QuestItemPrefab, Content, false);
-                go.GetComponent<QuestItemUI>().SetID(quest.ID);
-                if (quest.ID == 1)
-                {
-                    Text des = UITool.FindChild<Text>(go, "QuestDes");
-                    des.text = "消灭" + 1 + "/" + "3只史莱姆";
-                }
-                if (quest.ID == 2)
-                {
-                    Text des = UITool.FindChild<Text>(go, "QuestDes");
-                    des.text = "消灭" + 1 + "/" + "5只蝙蝠";
-                }
-                ShowQuestLsit.Add(quest);
-            }
-            
             QuestItemUI[] questItemUIs = Content.GetComponentsInChildren<QuestItemUI>();
-            foreach (Quest quest in QuestManager.Instance.FinishQuestList)
+            foreach (QuestItemUI questui in QuestManager.Instance.CanDeleteQuestList)
             {
-                for(int i= questItemUIs.Length - 1; i > 0; i--)
+                for (int i = questItemUIs.Length - 1; i > 0; i--)
                 {
-                    if( questItemUIs[i].ID == quest.ID)
+                    if (questItemUIs[i].ID == questui.ID)
                     {
                         Destroy(questItemUIs[i].gameObject);
                     }
