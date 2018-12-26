@@ -4,7 +4,6 @@ using System.Collections;
 public class NPCUIFix : NPCUI
 {
 
-    // Use this for initialization
     void Start()
     {
         SetID(ID);

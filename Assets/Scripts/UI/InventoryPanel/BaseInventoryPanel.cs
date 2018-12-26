@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class BaseInventoryPanel : MonoBehaviour
+public class BaseInventoryPanel : MonoSingleton<BaseInventoryPanel>
 {
 
 
-    protected Slot[] slotList;
+    public Slot[] slotList;
+
 
     protected CanvasGroup canvasGroup;
 
@@ -35,6 +36,7 @@ public class BaseInventoryPanel : MonoBehaviour
 
     public bool StoreItem(Item item, int count = 1)
     {
+
         if (item == null)
         {
             Debug.LogWarning("要存储的物品的id不存在");
@@ -51,6 +53,11 @@ public class BaseInventoryPanel : MonoBehaviour
             else
             {
                 slot.StoreItem(item, count);//把物品存储到这个空的物品槽里面
+                if (transform.name != "ShopPanel" && InventoryManager.Instance.IsQuestClear == false)
+                {
+                    InventoryManager.Instance.CheckItemIsQuest(item, count);
+
+                }
             }
         }
         else
@@ -59,6 +66,10 @@ public class BaseInventoryPanel : MonoBehaviour
             if (slot != null)
             {
                 slot.StoreItem(item, count);
+                if (transform.name != "ShopPanel" && InventoryManager.Instance.IsQuestClear == false)
+                {
+                    InventoryManager.Instance.CheckItemIsQuest(item, count);
+                }
             }
             else
             {
@@ -66,6 +77,10 @@ public class BaseInventoryPanel : MonoBehaviour
                 if (emptySlot != null)
                 {
                     emptySlot.StoreItem(item, count);
+                    if (transform.name != "ShopPanel" && InventoryManager.Instance.IsQuestClear == false)
+                    {
+                        InventoryManager.Instance.CheckItemIsQuest(item, count);
+                    }
                 }
                 else
                 {
@@ -76,9 +91,8 @@ public class BaseInventoryPanel : MonoBehaviour
         }
         return true;
     }
-
-
-
+    
+    
 
     public bool ReduceItem(int id)
     {
@@ -102,6 +116,10 @@ public class BaseInventoryPanel : MonoBehaviour
                 i++;
                 if (i >= count)
                 {
+                    if (InventoryManager.Instance.IsQuestClear == false)
+                    {
+                        InventoryManager.Instance.CheckItemIsQuest(item, -count);
+                    }
                     return true;
                 }
             }

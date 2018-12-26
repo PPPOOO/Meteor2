@@ -27,6 +27,7 @@ public class ConsumablePanel : BaseInventoryPanel
     {
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
+        
     }
 
 }

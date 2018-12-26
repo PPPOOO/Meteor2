@@ -11,6 +11,10 @@ public class QuestManager : MonoSingleton<QuestManager> {
     public List<QuestItemUI> FinishQuestList = new List<QuestItemUI>();//
     public List<QuestItemUI> CanDeleteQuestList = new List<QuestItemUI>();
 
+
+    public List<QuestItemUI> KillEnemyList = new List<QuestItemUI>();
+    public bool IsKillEnemyQuest = false;
+
     public List<QuestItemUI> QuestItemUIsList = new List<QuestItemUI>();
 
     protected override void Awake()
@@ -24,9 +28,6 @@ public class QuestManager : MonoSingleton<QuestManager> {
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            Debug.Log(AcceptQuestList.Count);
-            Debug.Log(StartQuestList.Count);
-            Debug.Log(FinishQuestList.Count);
             Debug.Log(CanDeleteQuestList.Count);
         }
     }
@@ -52,9 +53,20 @@ public class QuestManager : MonoSingleton<QuestManager> {
     public void AddAcceptQuestList(QuestItemUI questui)
     {
         AcceptQuestList.Add(questui);
+        
         switch (questui.Quest.Questtype)
         {
             case Quest.QuestType.Combat:
+                IsKillEnemyQuest = true;
+                KillEnemyList.Add(questui);
+                foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+                {
+                    if (questui.Quest.NPCID == npc.ID)
+                    {
+                        npc.ShowQuestStatusIcon(questui);
+                    }
+                }
+                questui.UpdateShowDes(questui.CurrentKillCount);
                 break;
             case Quest.QuestType.Talk:
                 foreach(NPCUI npc in NPCManager.Instance.QuestNPCList)
@@ -67,19 +79,51 @@ public class QuestManager : MonoSingleton<QuestManager> {
                 questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.StartNPCID).Name);
                 break;
             case Quest.QuestType.GetItem:
+                InventoryManager.Instance.GetItemQuest(questui);
+
                 foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
                 {
                     if (questui.Quest.NPCID == npc.ID)
                     {
-                        npc.ShowQuestStatusIcon(questui);
+                        if (questui.CurrentCount >= questui.Quest.Count)
+                        {
+                            AddFinishQuestList(questui);
+                        }
+                        else
+                        {
+                            npc.ShowQuestStatusIcon(questui);
+                        }
                     }
                 }
-
+                questui.UpdateShowDes(questui.CurrentCount);
                 break;
             case Quest.QuestType.Work:
                 break;
         }
     }
+
+    public void EnemyKilled(EnemyStatus enemyStatus)
+    {
+        if (IsKillEnemyQuest == false) return;
+        else
+        {
+            foreach(QuestItemUI  questItemUI in KillEnemyList)
+            {
+                if( questItemUI.Quest.EnemyID == enemyStatus.ID)
+                {
+                    questItemUI.CurrentKillCount++;
+                    questItemUI.UpdateShowDes(questItemUI.CurrentKillCount);
+                    if (questItemUI.CurrentKillCount >= questItemUI.Quest.KillCount)
+                    {
+                        AddFinishQuestList(questItemUI);
+                        
+                    }
+                }
+            }
+        }
+    }
+
+
     public void RemoveAcceptQuestList(QuestItemUI questui)
     {
         AcceptQuestList.Remove(questui);
@@ -108,15 +152,40 @@ public class QuestManager : MonoSingleton<QuestManager> {
     public void AddFinishQuestList(QuestItemUI questui)
     {
         FinishQuestList.Add(questui);
-        RemoveStartQuestList(questui);
-        foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+        if (questui.Quest.Questtype == Quest.QuestType.Talk)
         {
-            if (questui.Quest.StartNPCID == npc.ID)
-            {
-                npc.ShowFinishIcon(questui);
-            }
+            RemoveStartQuestList(questui);
         }
-        questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.StartNPCID).Name + "并拿到报酬");
+        else
+        {
+            RemoveAcceptQuestList(questui);
+        }
+        if(questui.Quest.Questtype == Quest.QuestType.Talk)
+        {
+            foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+            {
+                if (questui.Quest.StartNPCID == npc.ID)
+                {
+
+                    npc.ShowFinishIcon(questui);
+                    
+                }
+            }
+            questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.StartNPCID).Name + "并拿到报酬");
+        }
+        else 
+        {
+            foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+            {
+                if (questui.Quest.NPCID == npc.ID)
+                {
+                    npc.ShowFinishIcon(questui);
+                }
+            }
+            questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.NPCID).Name + "并拿到报酬");
+        }
+
+
     }
     public void RemoveFinishQuestList(QuestItemUI questui)
     {
@@ -125,9 +194,17 @@ public class QuestManager : MonoSingleton<QuestManager> {
 
     public void AddCanDeleteQuestList(QuestItemUI questui)
     {
+        if (questui.Quest.Questtype == Quest.QuestType.Combat)
+        {
+            if (KillEnemyList.Count <= 1)
+            {
+                IsKillEnemyQuest = false;
+            }
+            KillEnemyList.Remove(questui);
+
+        }
         CanDeleteQuestList.Add(questui);
         RemoveFinishQuestList(questui);
-        
     }
     public void RemoveCanDeleteQuestList(QuestItemUI questui)
     {
@@ -157,7 +234,9 @@ public class QuestManager : MonoSingleton<QuestManager> {
             switch (type)
             {
                 case Quest.QuestType.Combat:
-                    quest = new Quest(id, name, des, type, npcid,questReward);
+                    int enemyid = (int)temp["enemyid"].n;
+                    int killcount = (int)temp["killcount"].n;
+                    quest = new Quest(id, name, des, type, npcid,enemyid,killcount, questReward);
                     break;
                 case Quest.QuestType.Talk:
                     int endnpcid = (int)temp["startnpcid"].n;

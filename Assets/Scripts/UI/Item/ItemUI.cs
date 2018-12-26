@@ -6,13 +6,15 @@ public class ItemUI : MonoBehaviour
 {
     public Item Item { get; private set; }
     public int Amount { get; private set; }
-    
+    public int ID;
+
     public Image ItemImage;
     public Text AmountText;
     public GameObject PickedItem;
 
     public void SetItem(Item item, int amount = 1)
     {
+        ID = item.ID;
         this.Item = item;
         this.Amount = amount;
         ItemImage.sprite = Resources.Load<Sprite>(item.Sprite);

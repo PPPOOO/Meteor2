@@ -61,17 +61,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\Effect\Effects_01\Prefebs\DestroyForTime.cs" />
-    <Compile Include="Assets\Resources\Effect\Effects_01\Prefebs\FollowTarget.cs" />
-    <Compile Include="Assets\Resources\Effect\Effects_02\AnimationSpeed.cs" />
-    <Compile Include="Assets\Resources\Effect\Effects_02\ScrollUV.cs" />
+    <Compile Include="Assets\Prefabs\Effect\Effects_01\Prefebs\DestroyForTime.cs" />
+    <Compile Include="Assets\Prefabs\Effect\Effects_01\Prefebs\FollowTarget.cs" />
+    <Compile Include="Assets\Prefabs\Effect\Effects_02\AnimationSpeed.cs" />
+    <Compile Include="Assets\Prefabs\Effect\Effects_02\ScrollUV.cs" />
+    <Compile Include="Assets\Scripts\Character\AI\AttackState.cs" />
+    <Compile Include="Assets\Scripts\Character\AI\ChaseState.cs" />
+    <Compile Include="Assets\Scripts\Character\AI\FSMState.cs" />
+    <Compile Include="Assets\Scripts\Character\AI\FSMSystem.cs" />
+    <Compile Include="Assets\Scripts\Character\AI\PatrolState.cs" />
+    <Compile Include="Assets\Scripts\Character\Attr\AddAttrValue.cs" />
     <Compile Include="Assets\Scripts\Character\Attr\ApplyAttrEffect.cs" />
     <Compile Include="Assets\Scripts\Character\Attr\AttrManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacetStatus.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\EnemyAct.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\EnemyStatus.cs" />
+    <Compile Include="Assets\Scripts\Character\Enemy\EnemyStatusFix.cs" />
     <Compile Include="Assets\Scripts\Character\NPC\NPCInfo.cs" />
     <Compile Include="Assets\Scripts\Character\NPC\NPCManager.cs" />
     <Compile Include="Assets\Scripts\Character\NPC\NPCUI.cs" />
     <Compile Include="Assets\Scripts\Character\NPC\NPCUIFix.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerAct.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\GameEvent\GameEventManager.cs" />
@@ -86,10 +98,23 @@
     <Compile Include="Assets\Scripts\Item\OtherItem.cs" />
     <Compile Include="Assets\Scripts\Item\OtherItem\ItemPet.cs" />
     <Compile Include="Assets\Scripts\Item\OtherItem\ItemSeed.cs" />
+    <Compile Include="Assets\Scripts\MapChange\MapChangTrigger.cs" />
+    <Compile Include="Assets\Scripts\MapChange\MapManager.cs" />
     <Compile Include="Assets\Scripts\Quest\Quest.cs" />
     <Compile Include="Assets\Scripts\Quest\QuestItemUI.cs" />
     <Compile Include="Assets\Scripts\Quest\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Quest\QuestReward.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillBaseInfo.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillIconDrag.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillManager.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillMulti.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillSelf.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillSelfRange.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillSense\SkillSenseMulit.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillSense\SkillSenseTra.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillSingle.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillTrajectory.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillUI.cs" />
     <Compile Include="Assets\Scripts\Test.cs" />
     <Compile Include="Assets\Scripts\Tool\MonoBehaviourTool.cs" />
     <Compile Include="Assets\Scripts\Tool\MonoSingleton.cs" />

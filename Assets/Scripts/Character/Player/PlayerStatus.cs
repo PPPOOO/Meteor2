@@ -26,16 +26,18 @@ public class PlayerStatus : CharacetStatus {
     
     public int HungerSpeed = 1;
 
-
+    public BoxCollider2D BoxCollider2D;
     public int CoinCount = 1000;
 
     private void Start()
     {
+        BoxCollider2D = GetComponent<BoxCollider2D>();
         InvokeRepeating("InHunger", 0, 2);
         STR = 20;
         AGI = 20;
         MAG = 20;
         VIT = 20;
+        AD = 100;
     }
 
     public void GetHeal(int hp, int mp)

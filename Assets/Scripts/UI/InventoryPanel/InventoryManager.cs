@@ -18,6 +18,9 @@ public class InventoryManager : MonoBehaviour
             return _instance;
         }
     }
+
+    public bool IsQuestClear = true;
+    public List<QuestItemUI> questItemUIs = new List<QuestItemUI>();
     public List<Item> itemList;
     protected  void Awake()
     {
@@ -26,10 +29,14 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
+        
     }
+
+
 
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Y))
         {
             ChestPanel.Instance.DisplaySwitch();
@@ -53,6 +60,72 @@ public class InventoryManager : MonoBehaviour
         {
             QuestPanel.Instance.DisplaySwitch();
         }
+    }
+
+
+    public void GetItemQuest(QuestItemUI questItemUI)
+    {
+        IsQuestClear = false;
+        questItemUIs.Add(questItemUI);
+        switch (GetItemById(questItemUI.Quest.ItemID).Type)
+        {
+            case Item.ItemType.Consumable:
+                FindQuestItem(ConsumablePanel.Instance.slotList);
+                break;
+            case Item.ItemType.Equipment:
+                FindQuestItem(EquipmentPanel.Instance.slotList);
+                break;
+            case Item.ItemType.Materials:
+                FindQuestItem(MaterialsPanel.Instance.slotList);
+                break;
+            case Item.ItemType.OtherItem:
+                FindQuestItem(OtherItemPanel.Instance.slotList);
+                break;
+        }
+    }
+
+    public void FindQuestItem(Slot[] slotList )
+    {
+        foreach (QuestItemUI questItemUI in questItemUIs)
+        {
+            int Count = 0;
+            foreach (Slot slot in slotList)
+            {
+                if (slot.transform.childCount > 0)
+                {
+                    if (slot.transform.GetComponentInChildren<ItemUI>().Item.ID == questItemUI.Quest.ItemID)
+                    {
+                        Count += slot.transform.GetComponentInChildren<ItemUI>().Amount;
+                    }
+                }
+            }
+            questItemUI.CurrentCount = Count;
+        }
+    }
+    public void CheckItemIsQuest(Item item,int count=1)
+    {
+        foreach (QuestItemUI questItemUI in questItemUIs)
+        {
+            if(item.ID== questItemUI.Quest.ItemID)
+            {
+                questItemUI.CurrentCount += count;
+            }
+            questItemUI.UpdateShowDes(questItemUI.CurrentCount);
+            
+            if (questItemUI.CurrentCount >= questItemUI.Quest.Count)
+            {
+                foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+                {
+                    if (questItemUI.Quest.NPCID == npc.ID)
+                    {
+                        npc.HideQuestIcon();
+                        QuestManager.Instance.AddFinishQuestList(questItemUI);
+                    }
+                }
+            }
+
+        }
+
     }
 
     public Item GetItemById(int id)

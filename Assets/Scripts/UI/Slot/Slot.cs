@@ -27,6 +27,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             transform.GetChild(0).GetComponent<ItemUI>().AddAmount(count);
         }
+
+        
+
     }
 
     #region 得到当前格子里的物品类型，物品id，和是否达到数量上限。主要用于储存新物品时对背包内格子物品的检测
@@ -86,7 +89,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             ItemUI currentItem = transform.GetChild(0).GetComponent<ItemUI>();
 
-            if (PickedItem.Instance.IsPickedItem==false)//当前没有选中任何物品( 当前手上没有任何物品)当前鼠标上没有任何物品
+            if (PickedItem.Instance.IsPickedItem==false)//当前手上没有任何物品
             {
                 if (Input.GetKey(KeyCode.LeftShift))//按住左shift键快速移动物品
                 {

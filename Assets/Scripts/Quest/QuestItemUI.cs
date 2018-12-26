@@ -11,6 +11,8 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
     public Text Des;
     public Text Reward;
     public Quest Quest;
+    public int CurrentCount=0;
+    public int CurrentKillCount = 0;
 
 
     public void SetID(int id)
@@ -46,16 +48,29 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
 
             }
         }
-        
     }
 
 
 
     public void UpdateShowDes(string des)
     {
-
         Des.text = des;
     }
+
+    public void UpdateShowDes(int count)
+    {
+        
+        if (Quest.Questtype == Quest.QuestType.GetItem)
+        {
+            Des.text = (NPCManager.Instance.GetNPCByID(Quest.NPCID)).Name + " " + count + "/" + Quest.Count + " " + (InventoryManager.Instance.GetItemById(Quest.ItemID).Name);
+        }
+       else if(Quest.Questtype == Quest.QuestType.Combat)
+        {
+            Des.text = EnemyManager.Instance.GetEnemyById(Quest.EnemyID).Name + " " + count + "/" + Quest.KillCount;
+        }
+    }
+
+    
 
     IEnumerator AcceptQuestConfirm(int id)
     {

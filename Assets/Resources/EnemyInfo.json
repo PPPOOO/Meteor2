@@ -1,0 +1,36 @@
+﻿[
+    {
+        "id": 1,
+        "name": "史莱姆",
+        "animation": "Slime",
+        "gold": 2,
+        "exp": 3,
+        "attr": [
+            {
+                "attrtype": "HP",
+                "value": 50
+            },
+            {
+                "attrtype": "AD",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "蝙蝠",
+        "animation": "Bat",
+        "gold": 4,
+        "exp": 5,
+        "attr": [
+            {
+                "attrtype": "HP",
+                "value": 70
+            },
+            {
+                "attrtype": "AD",
+                "value": 7
+            }
+        ]
+    }
+]

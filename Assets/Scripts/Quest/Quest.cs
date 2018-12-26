@@ -15,7 +15,8 @@ public class Quest
     public int StartNPCID;
     public int ItemID;
     public int Count;
-
+    public int KillCount;
+    public int EnemyID;
 
     public Quest(int id,string name,string des,QuestType questType,int npcid, QuestReward questRewards)
     {
@@ -29,6 +30,21 @@ public class Quest
         Queststatus = QuestStatus.None;
     }
 
+    //杀敌任务
+    public Quest(int id, string name, string des, QuestType questType, int npcid, int enemyid, int killcount ,QuestReward questRewards)
+    {
+        ID = id;
+        Name = name;
+        Des = des;
+        Questtype = questType;
+        NPCID = npcid;
+        QuestRewards = questRewards;
+        SetTypeIcon();
+        EnemyID = enemyid;
+        KillCount = killcount;
+    }
+
+    //跑腿任务
     public Quest(int id, string name, string des, QuestType questType, int npcid, QuestReward questRewards,int startnpcid)
     {
         ID = id;
@@ -40,7 +56,7 @@ public class Quest
         StartNPCID = startnpcid;
         SetTypeIcon();
     }
-
+    //得到物品任务
     public Quest(int id, string name, string des, QuestType questType, int npcid, QuestReward questRewards,int itemid,int count )
     {
         ID = id;

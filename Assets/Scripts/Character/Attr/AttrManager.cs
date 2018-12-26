@@ -58,48 +58,45 @@ public class AttrManager : MonoBehaviour
         }
     }
 
+    
 
-    public void ChangeAttrByType(GameObject gameObject, AttrType attrType, bool ispositive, float value)
+    public void ChangeAttrByType(GameObject gameObject,ApplyAttrEffect applyAttrEffect)
     {
-
         CharacetStatus status = gameObject.GetComponent<CharacetStatus>();
-        int intvalue = (int)value;
-        if (attrType == AttrType.HPRemain)
+        if (applyAttrEffect.AT == AttrType.HP)
         {
-            if (ispositive)
-                status.HPRemainUp(intvalue);
-            else
-                status.HPRemainDown(intvalue);
+            status.HPChange((int)applyAttrEffect.FixValue);
         }
-        if (attrType == AttrType.MPRemain)
+        else if (applyAttrEffect.AT == AttrType.HPRemain)
         {
-            if (ispositive)
-                status.MPRemainUp(intvalue);
-            else
-                status.MPRemainDown(intvalue);
+            status.HPRemainChange((int)applyAttrEffect.FixValue);
         }
-        if (attrType == AttrType.EPRemain)
+        else if (applyAttrEffect.AT == AttrType.MP)
         {
-            if (ispositive)
-                status.EPRemainUp(intvalue);
-            else
-                status.EPRemainDown(intvalue);
+            status.MPChange((int)applyAttrEffect.FixValue);
         }
-        if (attrType == AttrType.HungerRemain)
+        else if (applyAttrEffect.AT == AttrType.MPRemain)
         {
-            if (ispositive)
-                status.HungerRemainUp(intvalue);
-            else
-                status.HungerRemainDown(intvalue);
+            status.MPRemainChange((int)applyAttrEffect.FixValue);
         }
-        
-
-        if (attrType == AttrType.AttackRate)
+        else if (applyAttrEffect.AT == AttrType.EP)
         {
-            if (ispositive)
-                status.AttackRateUp(intvalue);
-            else
-                status.AttackRateDown(intvalue);
+            status.EPChange((int)applyAttrEffect.FixValue);
+        }
+        else if (applyAttrEffect.AT == AttrType.EPRemain)
+        {
+            status.EPRemainChange((int)applyAttrEffect.FixValue);
+        }
+        else if (applyAttrEffect.AT == AttrType.HungerRemain)
+        {
+            status.HungerRemainChange((int)applyAttrEffect.FixValue);
+        }else if (applyAttrEffect.AT == AttrType.AD)
+        {
+            status.ADChange((int)applyAttrEffect.FixValue);
+        }
+        else if (applyAttrEffect.AT == AttrType.AttackRate)
+        {
+            status.AttackRateChange((int)applyAttrEffect.FixValue);
         }
     }
 

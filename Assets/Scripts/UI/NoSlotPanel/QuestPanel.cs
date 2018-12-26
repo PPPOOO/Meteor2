@@ -30,20 +30,25 @@ public class QuestPanel : BasePanel<QuestPanel>
     {
         if (QuestManager.Instance.AcceptQuestList.Count == 0&& QuestManager.Instance.StartQuestList.Count==0&& QuestManager.Instance.FinishQuestList.Count==0)
         {
+
             NoQuestText.gameObject.SetActive(true);
         }
         else
         {
             NoQuestText.gameObject.SetActive(false);
-            QuestItemUI[] questItemUIs = Content.GetComponentsInChildren<QuestItemUI>();
-            foreach (QuestItemUI questui in QuestManager.Instance.CanDeleteQuestList)
+            
+        }
+        QuestItemUI[] questItemUIs = Content.GetComponentsInChildren<QuestItemUI>();
+        Debug.Log(questItemUIs.Length);
+        Debug.Log(QuestManager.Instance.CanDeleteQuestList.Count);
+        foreach (QuestItemUI questui in QuestManager.Instance.CanDeleteQuestList)
+        {
+
+            for (int i = questItemUIs.Length - 1; i >= 0; i--)
             {
-                for (int i = questItemUIs.Length - 1; i > 0; i--)
+                if (questItemUIs[i].ID == questui.ID)
                 {
-                    if (questItemUIs[i].ID == questui.ID)
-                    {
-                        Destroy(questItemUIs[i].gameObject);
-                    }
+                    Destroy(questItemUIs[i].gameObject);
                 }
             }
         }

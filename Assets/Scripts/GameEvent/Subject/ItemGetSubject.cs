@@ -4,15 +4,14 @@ using System.Collections;
 public class ItemGetSubject : IGameEventSubject
 {
 
-    public int ItemID;
-    public ItemGetSubject(int id)
-    {
-        ItemID = id;
-    }
+    public int ItemCount=0;
+
+
+
 
     public override void Notify()
     {
-
+        
         base.Notify();
     }
 }

@@ -44,7 +44,8 @@ public class ShopSlot : Slot
             if (PickedItem.Instance.IsPickedItem == true)
             {
                 ConfirmPanel.Instance.Show();
-                StartCoroutine(SellItemConfirm(PickedItem.Instance.item));
+                StartCoroutine(SellItemConfirm(PickedItem.Instance.item, PickedItem.Instance.Count));
+
             }
             else
             {
@@ -65,14 +66,18 @@ public class ShopSlot : Slot
     }
 
 
-    IEnumerator SellItemConfirm(Item item)
+    IEnumerator SellItemConfirm(Item item,int count)
     {
         while (1 > 0)
         {
             yield return new WaitForSeconds(0.05f);
             if (ConfirmPanel.Instance.IsClickOK)
             {
-                ps.CoinUP(item.SellPrice);
+                ps.CoinUP(item.SellPrice*count);
+                if (InventoryManager.Instance.IsQuestClear == false)
+                {
+                    InventoryManager.Instance.CheckItemIsQuest(item, -count);
+                }
                 PickedItem.Instance.Hide();
                 break;
             }

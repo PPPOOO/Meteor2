@@ -30,53 +30,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetMouseButton(1) && MonoBehaviourTool.Instance.GetOverUI() == false)
-        {
-            MouseFollow();
-        }
-        else
-        {
-            KeyToMove();
-        }
-        //else if (Input.GetKey(KeyCode.W))
-        //{
-        //    if (Input.GetKey(KeyCode.A))
-        //    {
-        //        targetpos = new Vector3(transform.position.x - move_distance, transform.position.y + move_distance, transform.position.z);
-        //    }
-        //    else if (Input.GetKey(KeyCode.D))
-        //    {
-        //        targetpos = new Vector3(transform.position.x + move_distance, transform.position.y + move_distance, transform.position.z);
-        //    }
-        //    else
-        //    {
-        //        targetpos = new Vector3(transform.position.x, transform.position.y + move_distance, transform.position.z);
-        //    }
-        //}
-        //else if (Input.GetKey(KeyCode.S))
-        //{
-        //    if (Input.GetKey(KeyCode.A))
-        //    {
-        //        targetpos = new Vector3(transform.position.x - move_distance, transform.position.y - move_distance, transform.position.z);
-        //    }
-        //    else if (Input.GetKey(KeyCode.D))
-        //    {
-        //        targetpos = new Vector3(transform.position.x + move_distance, transform.position.y - move_distance, transform.position.z);
-        //    }
-        //    else
-        //    {
-        //        targetpos = new Vector3(transform.position.x, transform.position.y - move_distance, transform.position.z);
-        //    }
-        //}
-        //else if (Input.GetKey(KeyCode.A))
-        //{
-        //    targetpos = new Vector3(transform.position.x - move_distance, transform.position.y, transform.position.z);
-        //}
-        //else if (Input.GetKey(KeyCode.D))
-        //{
-        //    targetpos = new Vector3(transform.position.x + move_distance, transform.position.y, transform.position.z);
-        //}
-        //transform.position = Vector3.MoveTowards(transform.position, targetpos, ps.MoveSpeed * 0.03f);
+        KeyToMove();
     }
 
     public void KeyToMove()
@@ -97,58 +51,5 @@ public class PlayerMove : MonoBehaviour
         transform.position = transform.position + targetpos*Time.deltaTime*ps.MoveSpeed;
     }
 
-    void MouseFollow()
-    {
-
-        targetpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        targetpos.z = 0;
-        xiangdui_pos = targetpos - transform.position;
-        if (xiangdui_pos.y > 0 && xiangdui_pos.x > 0)
-        {
-            if (xiangdui_pos.y > xiangdui_pos.x)
-            {
-                animator.SetTrigger("walkup");
-            }
-            else
-            {
-                animator.SetTrigger("walkright");
-            }
-        }
-        if (xiangdui_pos.y > 0 && xiangdui_pos.x < 0)
-        {
-            if (xiangdui_pos.y > -xiangdui_pos.x)
-            {
-                animator.SetTrigger("walkup");
-            }
-            else
-            {
-                animator.SetTrigger("walkleft");
-            }
-        }
-        if (xiangdui_pos.y < 0 && xiangdui_pos.x > 0)
-        {
-            if (-xiangdui_pos.y > xiangdui_pos.x)
-            {
-                animator.SetTrigger("walkdown");
-            }
-            else
-            {
-                animator.SetTrigger("walkright");
-            }
-        }
-        if (xiangdui_pos.y < 0 && xiangdui_pos.x < 0)
-        {
-            if (-xiangdui_pos.y > -xiangdui_pos.x)
-            {
-                animator.SetTrigger("walkdown");
-            }
-            else
-            {
-                animator.SetTrigger("walkleft");
-            }
-        }
-
-    }
 
 }

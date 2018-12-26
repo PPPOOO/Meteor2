@@ -84,7 +84,7 @@ public class NPCTalkPanel : BasePanel<NPCTalkPanel>
     public void OnClikcTalk ()
     {
         IsClickTalk = true;
-        //Hide();
+        Hide();
     }
     public void OnClikcQuit()
     {

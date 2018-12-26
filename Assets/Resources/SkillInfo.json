@@ -1,0 +1,149 @@
+﻿[
+    {
+        "id": 101,
+        "name": "快速攻击",
+        "sprite": "Copy/Sprites/Skill/skill-101",
+        "des": "攻击速度变为200%，并持续回血",
+        "mp": 10,
+        "ep": 10,
+        "coolTime": 10,
+        "demandlv": 10,
+        "releaseType": "Self",
+        "applyAttr": [
+            {
+                "attrType": "HPRemain",
+                "count": 5,
+                "fixValue": 10,
+                "addValue": [
+                    {
+                        "addAttrType": "STR",
+                        "addpoint": 0.1
+                    },
+                    {
+                        "addAttrType": "AGI",
+                        "addpoint": 0.2
+                    }
+                ]
+            },
+            {
+                "attrType": "AttackRate",
+                "time": 20,
+                "fixValue": 200
+            }
+        ]
+    },
+    {
+        "id": 201,
+        "name": "疾风斩",
+        "sprite": "Copy/Sprites/Skill/skill-201",
+        "des": "向目标位置发起一道斩击，对路径上的敌人造成力量敏捷加成的物理伤害",
+        "mp": 5,
+        "ep": 5,
+        "coolTime": 3,
+        "demandlv": 5,
+        "releaseType": "Trajectory",
+        "shotSize": 2,
+        "shotSpeed": 5,
+        "shotTime": 3,
+        "pierce": true,
+        "applyAttr": [
+            {
+                "attrType": "HPRemain",
+                "fixValue": -20,
+                "addValue": [
+                    {
+                        "addAttrType": "STR",
+                        "addpoint": -0.2
+                    },
+                    {
+                        "addAttrType": "AGI",
+                        "addpoint": -0.2
+                    }
+                ]
+            },
+            {
+                "attrType": "MoveSpeed",
+                "time": 3,
+                "fixValue": -50
+            }
+        ]
+    },
+    {
+        "id": 301,
+        "name": "蓄力一击",
+        "sprite": "Copy/Sprites/Skill/skill-301",
+        "des": "对目标造成300%的物理伤害",
+        "mp": 0,
+        "ep": 5,
+        "coolTime": 1,
+        "demandlv": 2,
+        "releaseType": "Single",
+        "distance": 5,
+        "applyAttr": [
+            {
+                "attrType": "HPRemain",
+                "fixValue": -30,
+                "addValue": [
+                    {
+                        "addAttrType": "STR",
+                        "addpoint": -1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 402,
+        "name": "召唤箭雨",
+        "sprite": "Copy/Sprites/Skill/skill-401",
+        "des": "以自身为半径，召唤一次伤害为200%物理攻击的箭雨攻击",
+        "mp": 10,
+        "ep": 5,
+        "coolTime": 5,
+        "demandlv": 3,
+        "releaseType": "SelfRange",
+        "range": 5,
+        "applyAttr": [
+            {
+                "attrType": "HPRemain",
+                "fixValue": -20,
+                "addValue": [
+                    {
+                        "addAttrType": "AGI",
+                        "addpoint": -0.5
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 503,
+        "name": "魔力爆炸",
+        "sprite": "Copy/Sprites/Skill/skill-501",
+        "des": "对目标范围造成300%的魔法伤害",
+        "mp": 10,
+        "ep": 10,
+        "coolTime": 5,
+        "demandlv": 10,
+        "releaseType": "Multi",
+        "range": 5,
+        "distance": 10,
+        "applyAttr": [
+            {
+                "attrType": "HPRemain",
+                "fixValue": -40,
+                "addValue": [
+                    {
+                        "addAttrType": "MAG",
+                        "addpoint": -0.5
+                    }
+                ]
+            },
+            {
+                "attrType": "HPRemain",
+                "count": 5,
+                "fixValue": -5
+            }
+        ]
+    }
+]

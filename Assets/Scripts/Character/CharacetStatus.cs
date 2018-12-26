@@ -5,71 +5,68 @@ using UnityEngine;
 public class CharacetStatus : MonoBehaviour {
 
     public int Level;
-    public int HP = 100;
-    public int HP_Remain = 50;
-    public int MP = 100;
-    public int MP_Remain = 50;
-    public int EP = 100;
-    public int EP_Remain = 50;
-    public int Hunger = 100;
-    public int Hunger_Remain = 50;
+    public int HP ;
+    public int HP_Remain ;
+    public int MP ;
+    public int MP_Remain ;
+    public int EP ;
+    public int EP_Remain ;
+    public int Hunger ;
+    public int Hunger_Remain ;
     public int STR ;
     public int AGI ;
     public int MAG ;
     public int VIT ;
 
+    public int AD;
+    public float AttackDistance=2;
+    public float AttackRate=1;
+    public float AttackTimer=0;
+    public float MoveSpeed ;
 
-    public float AttackDistance;
-    public float AttackRate;
-    public float AttackTimer;
-    public float MoveSpeed = 5;
+    public void HPChange(int count)
+    {
+        HP += count;
+    }
 
 
-    public void HPRemainUp(int count)
+    public void HPRemainChange(int count)
     {
         HP_Remain += count;
     }
-    public void HPRemainDown(int count)
-    {
-        HP_Remain -= count;
-    }
 
-    public void MPRemainUp(int count)
+    public void MPChange(int count)
+    {
+        MP += count;
+    }
+    public void MPRemainChange(int count)
     {
         MP_Remain += count;
     }
-    public void MPRemainDown(int count)
-    {
-        MP_Remain -= count;
-    }
 
-    public void EPRemainUp(int count)
+    public void EPChange(int count)
+    {
+        EP += count;
+    }
+    public void EPRemainChange(int count)
     {
         EP_Remain += count;
     }
-    public void EPRemainDown(int count)
-    {
-        EP_Remain -= count;
-    }
 
-    public void HungerRemainUp(int count)
+
+    public void HungerRemainChange(int count)
     {
         Hunger_Remain += count;
     }
-    public void HungerRemainDown(int count)
+
+    public void ADChange(int count)
     {
-        Hunger_Remain -= count;
+        AD += count;
     }
 
-
-
-    public void AttackRateUp(int count)
+    public void AttackRateChange(int count)
     {
         AttackRate *= ((float)count) / 100;
-    }
-    public void AttackRateDown(int count)
-    {
-        AttackRate /=((float) count) / 100;
     }
 
 }
