@@ -24,6 +24,24 @@ public class CharacetStatus : MonoBehaviour {
     public float AttackTimer=0;
     public float MoveSpeed ;
 
+
+    private SpriteRenderer mSR;
+    private Color mNormalColor;
+
+    public bool IsDead = false;
+    public AudioClip TakeDamageClip;
+
+    protected GameObject HUDPrefab;
+    protected Transform HUDPanel;
+
+
+
+    public virtual void  Start()
+    {
+        TakeDamageClip = Resources.Load<AudioClip>("Sounds/slime-hit");
+        mSR = GetComponent<SpriteRenderer>();
+        mNormalColor = mSR.material.color;
+    }
     public void HPChange(int count)
     {
         HP += count;
@@ -33,6 +51,39 @@ public class CharacetStatus : MonoBehaviour {
     public void HPRemainChange(int count)
     {
         HP_Remain += count;
+        
+        HUDShowDamageValue(count.ToString());
+        if (count < 0)
+        {
+            if (IsDead == true) return;
+            
+            AudioSource.PlayClipAtPoint(TakeDamageClip, transform.position);
+            StartCoroutine(ShowBodyRed());
+            if (HP_Remain <= 0&&gameObject.tag=="Enemy")
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().GetExp(gameObject.GetComponent<EnemyStatus>().enemy.Exp);
+                IsDead = true;
+                gameObject.GetComponent<EnemyStatus>().animator.SetBool("IsDead", true);
+                QuestManager.Instance.EnemyKilled(gameObject.GetComponent<EnemyStatus>());
+                Destroy(gameObject, 1f);
+            }
+        }
+    }
+
+    IEnumerator ShowBodyRed()
+    {
+        mSR.material.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        mSR.material.color = mNormalColor;
+    }
+    public void HUDShowDamageValue(string des)
+    {
+        HUDPrefab = Resources.Load<GameObject>("HUDText");
+        HUDPanel = GameObject.FindGameObjectWithTag("Canvas").transform.Find("HUDPanel");
+        GameObject HUDTextgo = Instantiate(HUDPrefab);
+        HUDTextgo.transform.SetParent(HUDPanel, false);
+        HUDTextgo.GetComponent<HUDText>().target = gameObject.transform;
+        HUDTextgo.GetComponent<HUDText>().ShowDamgeValue(des);
     }
 
     public void MPChange(int count)
@@ -66,7 +117,12 @@ public class CharacetStatus : MonoBehaviour {
 
     public void AttackRateChange(int count)
     {
-        AttackRate *= ((float)count) / 100;
+        AttackRate *= ((float)(100 + count)) / 100;
     }
 
+
+    public void MoveSpeedChange(int count)
+    {
+        MoveSpeed *=((float) (100 + count)) / 100;
+    }
 }

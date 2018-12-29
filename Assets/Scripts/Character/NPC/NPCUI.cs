@@ -44,10 +44,8 @@ public class NPCUI :MonoBehaviour
             RandomMove();
         }
         float randomTime = Random.Range(0, 3);
-        InvokeRepeating("ShowHUDText", randomTime, 3);
+        //InvokeRepeating("ShowHUDText", randomTime, 3);
     }
-
-
 
 
     public  void OnMouseDown()

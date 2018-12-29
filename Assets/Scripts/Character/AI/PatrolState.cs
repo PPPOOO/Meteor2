@@ -50,7 +50,7 @@ public class PatrolState : FSMState
             pos[3] = new Vector3(beginPos.x + halfSideLength, beginPos.y - halfSideLength, beginPos.z);
             isFixBeginPos = true;
         }
-        mGameObject.transform.position = Vector3.MoveTowards(mGameObject.transform.position, pos[i], moveSpeed * Time.deltaTime);
+        mGameObject.transform.position = Vector3.MoveTowards(mGameObject.transform.position, pos[i],  mGameObject.GetComponent<CharacetStatus>().MoveSpeed * Time.deltaTime);
         if (mGameObject.transform.position == pos[i])
         {
             i++;

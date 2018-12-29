@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class Test : MonoBehaviour {
 
-    public void OnCollisionEnter2D(Collision2D collision)
+
+    private void Update()
     {
-        Debug.Log("22");
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartCoroutine(enumerator());
+        }
+    }
+
+    IEnumerator enumerator()
+    {
+        for(int i = 0; i <= 99; i++)
+        {
+            Debug.Log(i);
+            yield return new WaitForSeconds(1);
+        }
+        
+
     }
 }

@@ -21,7 +21,7 @@ public class FunctionPanel : MonoBehaviour
     }
     public void OnClickSkillBtn()
     {
-
+        SkillPanel.Instance.DisplaySwitch();
     }
     public void OnClickSettingBtn()
     {

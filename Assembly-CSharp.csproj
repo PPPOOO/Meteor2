@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\Item\OtherItem.cs" />
     <Compile Include="Assets\Scripts\Item\OtherItem\ItemPet.cs" />
     <Compile Include="Assets\Scripts\Item\OtherItem\ItemSeed.cs" />
+    <Compile Include="Assets\Scripts\MapChange\Map.cs" />
     <Compile Include="Assets\Scripts\MapChange\MapChangTrigger.cs" />
     <Compile Include="Assets\Scripts\MapChange\MapManager.cs" />
     <Compile Include="Assets\Scripts\Quest\Quest.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Assets\Scripts\Skill\SkillTrajectory.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillUI.cs" />
     <Compile Include="Assets\Scripts\Test.cs" />
+    <Compile Include="Assets\Scripts\Time\TimeManager.cs" />
     <Compile Include="Assets\Scripts\Tool\MonoBehaviourTool.cs" />
     <Compile Include="Assets\Scripts\Tool\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Tool\UIDrag.cs" />
@@ -137,17 +139,24 @@
     <Compile Include="Assets\Scripts\UI\Item\ToolTip.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\BasePanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\ConfirmPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\NoSlotPanel\HEMEXPPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\NoSlotPanel\MiniMapPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\NPCTalkContentPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\NPCTalkPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\QuestAcceptPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\QuestPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\NoSlotPanel\ShortcutPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\SkillPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\StatusPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\NoSlotPanel\TimePanel.cs" />
     <Compile Include="Assets\Scripts\UI\ResidentPanel\FunctionPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Slot\BagSlot.cs" />
     <Compile Include="Assets\Scripts\UI\Slot\PutOnSlot.cs" />
     <Compile Include="Assets\Scripts\UI\Slot\ShopSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\Slot\ShortcutSlot.cs" />
     <Compile Include="Assets\Scripts\UI\Slot\Slot.cs" />
+    <None Include="Assets\Texture\Shader\Transparent_Outline.shader" />
+    <None Include="Assets\Texture\Shader\MaskShader.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Meteor2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

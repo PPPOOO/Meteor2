@@ -12,10 +12,12 @@ public class SkillBaseInfo
     public int EP;
     public int DemandLv;
     public float CoolTime;
+    public ReleaseObject Releaseobject;
     public ReleaseType Type;
+    public List<ApplyAttrEffect> ApplyAttrEffects = new List<ApplyAttrEffect>();
 
 
-    public SkillBaseInfo(int id,string name,string sprite,string des,int mp,int ep,int lv,float coolTime,ReleaseType releaseType)
+    public SkillBaseInfo(int id,string name,string sprite,string des,int mp,int ep,int lv,float coolTime,ReleaseObject releasetype,ReleaseType releaseType, List<ApplyAttrEffect> applyAttrEffects)
     {
         ID = id;
         Name = name;
@@ -25,7 +27,9 @@ public class SkillBaseInfo
         EP = ep;
         DemandLv = lv;
         CoolTime = coolTime;
+        Releaseobject = releasetype;
         Type = releaseType;
+        ApplyAttrEffects = applyAttrEffects;
     }
 
     public enum ReleaseType
@@ -35,6 +39,12 @@ public class SkillBaseInfo
         Multi,
         Single,
         Trajectory
+    }
+
+    public enum ReleaseObject
+    {
+        Ally,
+        Enemy
     }
     
 }

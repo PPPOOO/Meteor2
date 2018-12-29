@@ -29,16 +29,27 @@ public class PlayerStatus : CharacetStatus {
     public BoxCollider2D BoxCollider2D;
     public int CoinCount = 1000;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         BoxCollider2D = GetComponent<BoxCollider2D>();
         InvokeRepeating("InHunger", 0, 2);
         STR = 20;
         AGI = 20;
         MAG = 20;
         VIT = 20;
-        AD = 100;
+        AD = 20;
+        HP = 100;
+        MP = 100;
+        EP = 100;
+        Hunger = 100;
+        HP_Remain = 90;
+        MP_Remain = 80;
+        EP_Remain = 70;
+        Hunger_Remain = 60;
     }
+
+
 
     public void GetHeal(int hp, int mp)
     {

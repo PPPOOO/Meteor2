@@ -9,7 +9,7 @@ public class ChaseState : FSMState
     }
     public override void Act()
     {
-        mGameObject.transform.position = Vector3.MoveTowards(mGameObject.transform.position, mPlayer.transform.position, moveSpeed * Time.deltaTime);
+        mGameObject.transform.position = Vector3.MoveTowards(mGameObject.transform.position, mPlayer.transform.position, mGameObject.GetComponent<CharacetStatus>().MoveSpeed * Time.deltaTime);
            
     }
 

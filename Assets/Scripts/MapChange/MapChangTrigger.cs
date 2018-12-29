@@ -20,7 +20,6 @@ public class MapChangTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("1");
         StartCoroutine(ChangeMap(col));
     }
 

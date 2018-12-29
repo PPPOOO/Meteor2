@@ -79,7 +79,7 @@ public class EnemyAct : MonoBehaviour
     {
         if (mIsDead == true) return;
         AudioSource.PlayClipAtPoint(mTakeDamage, transform.position);
-        EnemyStatus.HPRemainChange(-attack);
+        EnemyStatus.HPRemainChange(attack);
         StartCoroutine(ShowBodyRed());
         if (EnemyStatus.HP_Remain <= 0)
         {

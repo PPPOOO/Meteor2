@@ -127,6 +127,19 @@ public class BaseInventoryPanel : MonoSingleton<BaseInventoryPanel>
         return false;
     }
 
+    public int CheckItemCount(Item item)
+    {
+        int itemCount = 0;
+        foreach (Slot slot in slotList)
+        {
+            if (slot.transform.childCount >= 1 && slot.GetItemId() == item.ID)
+            {
+                itemCount += slot.GetComponentInChildren<ItemUI>().Amount;
+            }
+        }
+        return itemCount;
+    }
+
     /// <summary>
     /// 这个方法用来找到一个空的物品槽
     /// </summary>

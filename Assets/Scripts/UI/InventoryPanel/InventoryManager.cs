@@ -60,6 +60,10 @@ public class InventoryManager : MonoBehaviour
         {
             QuestPanel.Instance.DisplaySwitch();
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SkillPanel.Instance.DisplaySwitch();
+        }
     }
 
 
@@ -102,6 +106,7 @@ public class InventoryManager : MonoBehaviour
             questItemUI.CurrentCount = Count;
         }
     }
+
     public void CheckItemIsQuest(Item item,int count=1)
     {
         foreach (QuestItemUI questItemUI in questItemUIs)
@@ -123,9 +128,7 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
             }
-
         }
-
     }
 
     public Item GetItemById(int id)

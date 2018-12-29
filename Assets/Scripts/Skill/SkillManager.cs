@@ -3,71 +3,98 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SkillManager : MonoBehaviour
+public class SkillManager : MonoSingleton<SkillManager>
 {
-    private static SkillManager _instance;
 
-    public static SkillManager Instance
+
+    public GameObject SkillItem;
+    private Transform mContent;
+    private Dictionary<int, SkillBaseInfo> mSkillInfoDict;
+    private SkillUI[] mSkillList;
+    private PlayerStatus mPS;
+
+    protected override void Awake()
     {
-        get
+        base.Awake();
+        ParseSkillJson();
+    }
+
+
+    void Start()
+    {
+        mPS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        mContent = GameObject.FindGameObjectWithTag("Canvas").transform.Find("NoSlotPanel/SkillPanel/Scroll View/Viewport/Content");
+        foreach (KeyValuePair<int, SkillBaseInfo> kvp in mSkillInfoDict)
         {
-            if (_instance == null)
-            {
-                //下面的代码只会执行一次
-                _instance = GameObject.FindGameObjectWithTag("Manager").GetComponent<SkillManager>();
-            }
-            return _instance;
+            GameObject skillgo = Instantiate(SkillItem, mContent, false);
+            skillgo.GetComponent<SkillUI>().SetID(kvp.Key);
         }
     }
 
 
-    //public GameObject SkillItem;
-    //private Transform mContent;
-    private Dictionary<int, SkillBaseInfo> mSkillInfoDict;
-    //private SkillUI[] mSkillList;
-    //private PlayerStatus mPS;
 
-    //private void Awake()
-    //{
-    //    ParseSkillJson();
-    //}
-    //// Use this for initialization
-    //void Start()
-    //{
-    //    mPS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-    //    mContent = GameObject.FindGameObjectWithTag("Canvas").transform.Find("SkillPanel(Clone)/Scroll View/Viewport/Content");
-    //    foreach (KeyValuePair<int, SkillBaseInfo> kvp in mSkillInfoDict)
-    //    {
-    //        GameObject skillgo = Instantiate(SkillItem, mContent, false);
-    //        skillgo.GetComponent<SkillUI>().SetID(kvp.Key);
-    //    }
-    //}
 
-    //// Update is called once per frame
-    //void Update()
-    //{
 
-    //}
+    public void CaleSkillAttrObjectValue(GameObject SelfGameObject, GameObject ReleaseObject, SkillBaseInfo skillBaseInfo)
+    {
+        for (int i = 0; i < skillBaseInfo.ApplyAttrEffects.Count; i++)
+        {
+            float attradd = 0;
+            if (skillBaseInfo.ApplyAttrEffects[i].AddAttrValues != null)
+            {
+                for (int j = 0; j < skillBaseInfo.ApplyAttrEffects[i].AddAttrValues.Count; j++)
+                {
+                    attradd += AttrManager.Instance.GetAttrByType(SelfGameObject, skillBaseInfo.ApplyAttrEffects[i].AddAttrValues[j].AttrType)
+                        * skillBaseInfo.ApplyAttrEffects[i].AddAttrValues[j].AddPoint;
+                }
+            }
+            float totaladdpoint = attradd + skillBaseInfo.ApplyAttrEffects[i].FixValue;
 
-    //public SkillBaseInfo GetSkillByID(int id)
-    //{
-    //    SkillBaseInfo info = null;
-    //    mSkillInfoDict.TryGetValue(id, out info);
-    //    if (info == null)
-    //    {
-    //        Debug.LogError("没有id为" + id + "的技能!");
-    //    }
-    //    return info;
-    //}
+            StartCoroutine(ProduceEffect(ReleaseObject, skillBaseInfo.ApplyAttrEffects[i].AT,
+                totaladdpoint, skillBaseInfo.ApplyAttrEffects[i].Count, skillBaseInfo.ApplyAttrEffects[i].Time));
 
-    //public void UpdateSkillCanUse()
-    //{
-    //    mSkillList = GameObject.FindGameObjectWithTag("Canvas").transform.Find("SkillPanel(Clone)/Scroll View/Viewport/Content").GetComponentsInChildren<SkillUI>();
-    //    foreach (SkillUI skillItem in mSkillList)
-    //    {
-    //        skillItem.UpdateCanUse(mPS.Level);
-    //    }
-    //}
+        }
+    }
+
+
+    IEnumerator ProduceEffect(GameObject gameObject, AttrType attrType, float value, int count = 1, float time = 0)
+    {
+        Debug.Log(attrType);
+        for (int i = 0; i < count; i++)
+        {
+            if (gameObject == null) break;
+            AttrManager.Instance.ChangeAttrByType(gameObject, attrType, value);
+            yield return new WaitForSeconds(1);
+            if (time != 0)
+            {
+                yield return new WaitForSeconds(time);
+                if (gameObject == null) break;
+                AttrManager.Instance.ChangeAttrByType(gameObject, attrType, -value);
+            }
+        }
+    }
+
+
+
+    public SkillBaseInfo GetSkillByID(int id)
+    {
+        SkillBaseInfo info = null;
+        mSkillInfoDict.TryGetValue(id, out info);
+        if (info == null)
+        {
+            Debug.LogError("没有id为" + id + "的技能!");
+        }
+        return info;
+    }
+
+    public void UpdateSkillCanUse()
+    {
+        mSkillList = GameObject.FindGameObjectWithTag("Canvas").transform.Find("SkillPanel(Clone)/Scroll View/Viewport/Content").GetComponentsInChildren<SkillUI>();
+        foreach (SkillUI skillItem in mSkillList)
+        {
+            skillItem.UpdateCanUse(mPS.Level);
+        }
+    }
 
 
     void ParseSkillJson()
@@ -75,7 +102,7 @@ public class SkillManager : MonoBehaviour
 
         mSkillInfoDict = new Dictionary<int, SkillBaseInfo>();
         //文本为在Unity里面是 TextAsset类型
-        TextAsset skillText = Resources.Load<TextAsset>("Test");
+        TextAsset skillText = Resources.Load<TextAsset>("SkillInfo");
         string itemsJson = skillText.text;//物品信息的Json格式
         JSONObject j = new JSONObject(itemsJson);
         foreach (JSONObject temp in j.list)
@@ -90,23 +117,28 @@ public class SkillManager : MonoBehaviour
             float cooltime = temp["coolTime"].n;
             string str_releasetype = temp["releaseType"].str;
             SkillBaseInfo.ReleaseType releaseType = (SkillBaseInfo.ReleaseType)System.Enum.Parse(typeof(SkillBaseInfo.ReleaseType), str_releasetype);
+            SkillBaseInfo.ReleaseObject releaseObject = (SkillBaseInfo.ReleaseObject)System.Enum.Parse(typeof(SkillBaseInfo.ReleaseObject), temp["releaseObject"].str);
 
             List<ApplyAttrEffect> applyAttrEffects = new List<ApplyAttrEffect>();
             JSONObject j2 = temp["applyAttr"];
             foreach (JSONObject temp2 in j2.list)
             {
-                AttrType attrType = (AttrType)System.Enum.Parse(typeof(AttrType), temp2["attrTpye"].str);
+                AttrType attrType = (AttrType)System.Enum.Parse(typeof(AttrType), temp2["attrType"].str);
                 int fixvalue = (int)temp2["fixValue"].n;
                 List<AddAttrValue> addAttrValues = new List<AddAttrValue>();
-                JSONObject j3 = temp2["addValue"];
-                foreach (JSONObject temp3 in j3.list)
+                if (temp2["addValue"] != null)
                 {
-                    AttrType addattrtype = (AttrType)System.Enum.Parse(typeof(AttrType), temp3["addAttrType"].str);
-                    float ap = temp3["addpoint"].n;
-                    AddAttrValue add = new AddAttrValue(addattrtype, ap);
-                    addAttrValues.Add(add);
+                    JSONObject j3 = temp2["addValue"];
+                    foreach (JSONObject temp3 in j3.list)
+                    {
+                        AttrType addattrtype = (AttrType)System.Enum.Parse(typeof(AttrType), temp3["addAttrType"].str);
+                        float ap = temp3["addpoint"].n;
+                        AddAttrValue add = new AddAttrValue(addattrtype, ap);
+                        addAttrValues.Add(add);
+                    }
                 }
-                int count = 0;
+                
+                int count = 1;
                 if (temp2["count"] != null)
                 {
                     count = (int)temp2["count"].n;
@@ -125,27 +157,27 @@ public class SkillManager : MonoBehaviour
             {
                 case SkillBaseInfo.ReleaseType.Self:
 
-                    skill = new SkillSelf(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseType, applyAttrEffects);
+                    skill = new SkillSelf(id, name, sprite, des, mp, ep, demandlv, cooltime,  releaseObject, releaseType, applyAttrEffects);
                     break;
                 case SkillBaseInfo.ReleaseType.SelfRange:
                     float selfRange = temp["range"].n;
-                    skill = new SkillSelfRange(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseType, selfRange, applyAttrEffects);
+                    skill = new SkillSelfRange(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseObject, releaseType, selfRange, applyAttrEffects);
                     break;
                 case SkillBaseInfo.ReleaseType.Multi:
                     float multiDistance = temp["distance"].n;
                     float multiRange = temp["range"].n;
-                    skill = new SkillMulti(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseType, multiRange, multiDistance, applyAttrEffects);
+                    skill = new SkillMulti(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseObject, releaseType, multiRange, multiDistance, applyAttrEffects);
                     break;
                 case SkillBaseInfo.ReleaseType.Single:
                     float singleDistance = temp["distance"].n;
-                    skill = new SkillSingle(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseType, singleDistance, applyAttrEffects);
+                    skill = new SkillSingle(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseObject, releaseType, singleDistance, applyAttrEffects);
                     break;
                 case SkillBaseInfo.ReleaseType.Trajectory:
                     float shotSize = temp["shotSize"].n;
                     float shotSpeed = temp["shotSpeed"].n;
                     float shotTime = temp["shotTime"].n;
                     bool pierce = temp["pierce"].IsBool;
-                    skill = new SkillTrajectory(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseType, shotSize, shotSpeed, shotTime, pierce, applyAttrEffects);
+                    skill = new SkillTrajectory(id, name, sprite, des, mp, ep, demandlv, cooltime, releaseObject, releaseType, shotSize, shotSpeed, shotTime, pierce, applyAttrEffects);
                     break;
             }
             mSkillInfoDict.Add(id, skill);

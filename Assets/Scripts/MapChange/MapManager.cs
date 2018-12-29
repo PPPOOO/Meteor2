@@ -6,6 +6,9 @@ public class MapManager : MonoSingleton<MapManager>
 {
     public List<MapChangTrigger> mapChangTriggerList = new List<MapChangTrigger>();
 
+    public List<GameObject> Maps = new List<GameObject>();
+
+
     public Transform TwowayTrigger;
 
     public GameObject Playergameobject;

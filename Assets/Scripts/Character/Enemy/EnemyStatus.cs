@@ -7,19 +7,19 @@ public class EnemyStatus : CharacetStatus
     public int ID;
     public Enemy enemy;
     public Animator animator;
-    private GameObject HUDPrefab;
-    private Transform HUDPanel;
 
 
     public virtual void SetID(int id)
     {
+        
         HUDPrefab = Resources.Load<GameObject>("HUDText");
         HUDPanel = GameObject.FindGameObjectWithTag("Canvas").transform.Find("HUDPanel");
         animator = GetComponent<Animator>();
 
         ID = id;
         enemy = EnemyManager.Instance.GetEnemyById(ID);
-        for(int i = 0; i < enemy.ApplyAttrEffects.Count; i++)
+        MoveSpeed = 3;
+        for (int i = 0; i < enemy.ApplyAttrEffects.Count; i++)
         {
             AttrManager.Instance.ChangeAttrByType(gameObject, enemy.ApplyAttrEffects[i]);
         }

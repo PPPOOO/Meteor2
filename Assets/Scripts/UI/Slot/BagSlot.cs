@@ -32,7 +32,12 @@ public class BagSlot : Slot
                 }
                 else if(currentItemUI.Item.Type == Item.ItemType.Consumable)
                 {
-
+                    Consumable item = currentItemUI.Item as Consumable;
+                    for (int i = 0; i < item.ApplyAttrEffects.Count; i++)
+                    {
+                        AttrManager.Instance.ChangeAttrByType(ps.gameObject, item.ApplyAttrEffects[i]);
+                    }
+                    currentItemUI.ReduceAmount();
                 }
             }
         }

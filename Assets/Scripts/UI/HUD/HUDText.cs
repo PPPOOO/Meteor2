@@ -26,20 +26,22 @@ public class HUDText : MonoBehaviour
         r_Transform = GetComponent<RectTransform>();
         Destroy(gameObject, 3f);
         bb = target.position + Vector3.up;
-        InvokeRepeating("Show", 0, 0.03f);
+        InvokeRepeating("ShowAnimation", 0, 0.03f);
         
-        //if (target != null)
-        //{
+    }
 
-        //    Vector3 temp = target.TransformPoint(offset);
-        //    Vector3 ScenePos = Camera.main.WorldToScreenPoint(temp);
-        //    r_Transform.anchoredPosition3D = ScenePos;
-        //    Tweener tw = transform.DOLocalMoveY(transform.position.y+10, 1f);
-        //}
-
+    public void ShowDamgeValue(string des)
+    {
+        Des = GetComponent<Text>();
+        Des.text = des;
+        canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
+        r_Transform = GetComponent<RectTransform>();
+        Destroy(gameObject, 1f);
+        bb = target.position + Vector3.up;
+        InvokeRepeating("ShowAnimation", 0, 0.03f);
     }
    
-    public void Show()
+    public void ShowAnimation()
     {
         if (target != null)
         {

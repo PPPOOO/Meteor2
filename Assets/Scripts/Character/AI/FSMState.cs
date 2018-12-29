@@ -27,7 +27,7 @@ public abstract class FSMState
     public StateID stateID { get { return mStateID; } }
     protected GameObject mGameObject;
     protected FSMSystem mFSM;
-    protected float moveSpeed = 3;
+    protected float moveSpeed;
     protected GameObject mPlayer;
     protected float mDistance;
 
