@@ -6,18 +6,7 @@ using System.Collections.Generic;
 public class StatusPanel : BasePanel<StatusPanel>
 {
 
-    //private static StatusPanel _instance;
-    //public static StatusPanel Instance
-    //{
-    //    get
-    //    {
-    //        if (_instance == null)
-    //        {
-    //            _instance = GameObject.FindGameObjectWithTag("Canvas").transform.Find("NoSlotPanel/StatusPanel").GetComponent<StatusPanel>();
-    //        }
-    //        return _instance;
-    //    }
-    //}
+
     private Text mName;
     private Text mLV;
     private Text mStrTt;

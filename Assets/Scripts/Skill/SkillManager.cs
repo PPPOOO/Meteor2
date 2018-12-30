@@ -102,7 +102,7 @@ public class SkillManager : MonoSingleton<SkillManager>
 
         mSkillInfoDict = new Dictionary<int, SkillBaseInfo>();
         //文本为在Unity里面是 TextAsset类型
-        TextAsset skillText = Resources.Load<TextAsset>("SkillInfo");
+        TextAsset skillText = Resources.Load<TextAsset>("Json/SkillInfo");
         string itemsJson = skillText.text;//物品信息的Json格式
         JSONObject j = new JSONObject(itemsJson);
         foreach (JSONObject temp in j.list)

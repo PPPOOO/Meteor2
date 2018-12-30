@@ -10,6 +10,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
     public Transform[] Spwans;
     public int EnenyCount = 15;
 
+
     protected override void Awake()
     {
         base.Awake();
@@ -34,10 +35,6 @@ public class EnemyManager : MonoSingleton<EnemyManager>
             go.transform.position += randonpos;
             go.GetComponent<EnemyStatus>().SetID(randomEnemy);
         }
-        else
-        {
-            CancelInvoke();
-        }
     }
 
     public Enemy GetEnemyById(int id)
@@ -54,7 +51,7 @@ public class EnemyManager : MonoSingleton<EnemyManager>
 
     private void ParseEnemyInfo()
     {
-        TextAsset enemyinfo = Resources.Load<TextAsset>("EnemyInfo");
+        TextAsset enemyinfo = Resources.Load<TextAsset>("Json/EnemyInfo");
         JSONObject j = new JSONObject(enemyinfo.text);
         foreach (JSONObject temp in j.list)
         {

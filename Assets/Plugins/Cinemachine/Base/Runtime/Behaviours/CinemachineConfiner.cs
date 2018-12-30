@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine.Utility;
 using System;
 
+
 namespace Cinemachine
 {
     /// <summary>
@@ -159,11 +160,12 @@ namespace Cinemachine
             // 2D version
             if (m_BoundingShape2D.OverlapPoint(camPos))
                 return Vector3.zero;
-
+            
             // Find the nearest point on the shape's boundary
             if (!ValidatePathCache())
                 return Vector3.zero;
-
+            
+            
             Vector2 p = camPos;
             Vector2 closest = p;
             float bestDistance = float.MaxValue;

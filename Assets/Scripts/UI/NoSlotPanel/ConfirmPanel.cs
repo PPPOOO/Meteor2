@@ -20,8 +20,9 @@ public class ConfirmPanel : BasePanel<ConfirmPanel>
 
     public override void Show()
     {
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1;
         gameObject.SetActive(true);
-        base.Show();
         IsClickOK = false;
         IsClickCancel = false;
         Vector2 position;

@@ -17,6 +17,7 @@ public class GameEventManager : MonoSingleton<GameEventManager>
     protected override void Awake()
     {
         base.Awake();
+        mGameEvents.Add(GameEventType.NewDay, new NewDaySubject());
     }
 
  

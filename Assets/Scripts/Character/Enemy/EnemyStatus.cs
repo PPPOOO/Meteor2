@@ -27,9 +27,7 @@ public class EnemyStatus : CharacetStatus
         HP_Remain = HP;
         GetAnimation(enemy.Animation);
     }
-
-
-
+    
     public void GetAnimation(string NPC_Resources_Name)
     {
         string AnimationPath = "Animation/Animation/Enemy/";
@@ -41,5 +39,16 @@ public class EnemyStatus : CharacetStatus
         overrideController["Down"] = Resources.Load<AnimationClip>(AnimationPath + NPC_Resources_Name + "/Down");
         overrideController["Dead"] = Resources.Load<AnimationClip>(AnimationPath + NPC_Resources_Name + "/Dead");
 
+    }
+
+    public override void HPRemainChange(int count)
+    {
+        base.HPRemainChange(count);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().GetExp(gameObject.GetComponent<EnemyStatus>().enemy.Exp);
+        IsDead = true;
+        gameObject.GetComponent<EnemyStatus>().animator.SetBool("IsDead", true);
+        QuestManager.Instance.EnemyKilled(gameObject.GetComponent<EnemyStatus>());
+        EnemyManager.Instance.enemyUIsList.Remove(this);
+        Destroy(gameObject, 1f);
     }
 }

@@ -7,8 +7,7 @@ using DG.Tweening;
 public class BasePanel<T> : MonoBehaviour where T:MonoBehaviour
 {
 
-    protected CanvasGroup canvasGroup;
-
+   
     private static T m_instance;
 
     public static T Instance
@@ -24,6 +23,7 @@ public class BasePanel<T> : MonoBehaviour where T:MonoBehaviour
         m_instance = this as T;
     }
 
+    protected CanvasGroup canvasGroup;
 
 
 

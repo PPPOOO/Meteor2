@@ -420,10 +420,10 @@
         "daygrow": 10,
         "productid": 65,
         "diffsprites": {
-            "sprite1": "Copy/Crop/LevelOne/Corn/Corn_2",
-            "sprite2": "Copy/Crop/LevelOne/Corn/Corn_3",
-            "sprite3": "Copy/Crop/LevelOne/Corn/Corn_4",
-            "sprite4": "Copy/Crop/LevelOne/Corn/Corn_5"
+            "sprite1": "Crop/LevelOne/Corn/Corn_2",
+            "sprite2": "Crop/LevelOne/Corn/Corn_3",
+            "sprite3": "Crop/LevelOne/Corn/Corn_4",
+            "sprite4": "Crop/LevelOne/Corn/Corn_5"
         }
     },
     {
@@ -440,10 +440,10 @@
         "daygrow": 10,
         "productid": 66,
         "diffsprites": {
-            "sprite1": "Copy/Crop/LevelOne/Potato/Potato_2",
-            "sprite2": "Copy/Crop/LevelOne/Potato/Potato_3",
-            "sprite3": "Copy/Crop/LevelOne/Potato/Potato_4",
-            "sprite4": "Copy/Crop/LevelOne/Potato/Potato_5"
+            "sprite1": "Crop/LevelOne/Potato/Potato_2",
+            "sprite2": "Crop/LevelOne/Potato/Potato_3",
+            "sprite3": "Crop/LevelOne/Potato/Potato_4",
+            "sprite4": "Crop/LevelOne/Potato/Potato_5"
         }
     },
     {

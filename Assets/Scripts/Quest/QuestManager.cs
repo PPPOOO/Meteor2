@@ -113,10 +113,9 @@ public class QuestManager : MonoSingleton<QuestManager> {
                 {
                     questItemUI.CurrentKillCount++;
                     questItemUI.UpdateShowDes(questItemUI.CurrentKillCount);
-                    if (questItemUI.CurrentKillCount >= questItemUI.Quest.KillCount)
+                    if (questItemUI.CurrentKillCount >= questItemUI.Quest.KillCount&& FinishQuestList.Contains(questItemUI)==false)
                     {
                         AddFinishQuestList(questItemUI);
-                        
                     }
                 }
             }
@@ -215,7 +214,7 @@ public class QuestManager : MonoSingleton<QuestManager> {
     public void ParseQuestInfo()
     {
         QuestList = new List<Quest>();
-        TextAsset QuestText = Resources.Load<TextAsset>("QuestsInfo");
+        TextAsset QuestText = Resources.Load<TextAsset>("Json/QuestsInfo");
         string questsJson = QuestText.text;
         JSONObject j = new JSONObject(questsJson);
         foreach (JSONObject temp in j.list)

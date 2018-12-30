@@ -78,7 +78,7 @@ public class NPCManager : MonoSingleton<NPCManager>
 
     void ParseNPCsInfo()
     {
-        TextAsset NPCText = Resources.Load<TextAsset>("NPCsInfo");
+        TextAsset NPCText = Resources.Load<TextAsset>("Json/NPCsInfo");
         string strNPCText = NPCText.text;
         JSONObject j = new JSONObject(strNPCText);
         foreach(JSONObject temp in j.list)
@@ -116,7 +116,7 @@ public class NPCManager : MonoSingleton<NPCManager>
 
     void ParseHUDText()
     {
-        TextAsset HUDText = Resources.Load<TextAsset>("HUDTextInfo");
+        TextAsset HUDText = Resources.Load<TextAsset>("Json/HUDTextInfo");
         string strHUDText = HUDText.text;
         JSONObject j =new JSONObject(strHUDText);
         foreach(JSONObject temp in j.list)
@@ -129,7 +129,7 @@ public class NPCManager : MonoSingleton<NPCManager>
 
     void ParseTalkText()
     {
-        TextAsset TalkText = Resources.Load<TextAsset>("TalkTextInfo");
+        TextAsset TalkText = Resources.Load<TextAsset>("Json/TalkTextInfo");
         string strTalkText = TalkText.text;
         JSONObject j = new JSONObject(strTalkText);
         foreach (JSONObject temp in j.list)

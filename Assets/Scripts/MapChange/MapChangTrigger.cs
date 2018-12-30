@@ -15,7 +15,7 @@ public class MapChangTrigger : MonoBehaviour
     private void Start()
     {
         BoxCollider2D = GetComponent<BoxCollider2D>();
-        Bg = GameObject.FindGameObjectWithTag("Canvas").transform.Find("MapChange").GetComponent<Image>();
+        Bg = GameObject.FindGameObjectWithTag("Canvas").transform.Find("GoToBlack").GetComponent<Image>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)

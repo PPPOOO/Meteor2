@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class OtherItemPanel : BaseInventoryPanel
 {
@@ -26,5 +27,24 @@ public class OtherItemPanel : BaseInventoryPanel
     {
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
+    }
+
+    public List<ItemUI> FindSeed()
+    {
+        List<ItemUI> seeditemUIs = new List<ItemUI>();
+        foreach (Slot slot in slotList)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                OtherItem item = slot.transform.GetChild(0).GetComponent<ItemUI>().Item as OtherItem;
+                if (item.OtherType == OtherItem.OtherItemType.Seed)
+                {
+                    ItemUI seedItemUI = slot.transform.GetChild(0).GetComponent<ItemUI>();
+                    seeditemUIs.Add(seedItemUI);
+                }
+            }
+        }
+
+        return seeditemUIs;
     }
 }

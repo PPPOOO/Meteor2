@@ -48,7 +48,7 @@ public class CharacetStatus : MonoBehaviour {
     }
 
 
-    public void HPRemainChange(int count)
+    public virtual void HPRemainChange(int count)
     {
         HP_Remain += count;
         
@@ -59,14 +59,6 @@ public class CharacetStatus : MonoBehaviour {
             
             AudioSource.PlayClipAtPoint(TakeDamageClip, transform.position);
             StartCoroutine(ShowBodyRed());
-            if (HP_Remain <= 0&&gameObject.tag=="Enemy")
-            {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().GetExp(gameObject.GetComponent<EnemyStatus>().enemy.Exp);
-                IsDead = true;
-                gameObject.GetComponent<EnemyStatus>().animator.SetBool("IsDead", true);
-                QuestManager.Instance.EnemyKilled(gameObject.GetComponent<EnemyStatus>());
-                Destroy(gameObject, 1f);
-            }
         }
     }
 

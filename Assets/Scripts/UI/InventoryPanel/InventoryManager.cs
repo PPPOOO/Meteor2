@@ -175,7 +175,7 @@ public class InventoryManager : MonoBehaviour
     void ParseItemJson()
     {
         itemList = new List<Item>();
-        TextAsset itemText = Resources.Load<TextAsset>("ItemsInfo");
+        TextAsset itemText = Resources.Load<TextAsset>("Json/ItemsInfo");
         string itemsJson = itemText.text;
         JSONObject j = new JSONObject(itemsJson);
         foreach(JSONObject temp in j.list)

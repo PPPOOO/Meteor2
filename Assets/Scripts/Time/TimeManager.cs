@@ -11,7 +11,7 @@ public class TimeManager : MonoBehaviour {
         {
             if (mInstance == null)
             {
-                mInstance = new TimeManager();
+                mInstance = GameObject.FindGameObjectWithTag("Manager").GetComponent<TimeManager>();
             }
             return mInstance;
         }
@@ -19,9 +19,9 @@ public class TimeManager : MonoBehaviour {
     
 
     private float mCurrentTime = 0;
-    private int mOneDayTime = 10;
-    private int mMonth = 1;
-    private int mDay = 1;
+    private int mOneDayTime = 600;
+    public int mMonth = 1;
+    public int mDay = 1;
     private string mDayNight;
     private string mMonthStr="炎";
     private void Start()
@@ -38,11 +38,15 @@ public class TimeManager : MonoBehaviour {
     }
 
 
-    void NewDay()
+    public void NewDay()
     {
-        CancelInvoke("UpdateTime");
+
+        //Debug.Log(IsInvoking());
+        //CancelInvoke();
+        Debug.Log(mDay);
         mDay++;
-        //GameEventManager.Instance.NotifySubject(GameEventType.NewDay);
+        Debug.Log(mDay);
+        GameEventManager.Instance.NotifySubject(GameEventType.NewDay);
         mCurrentTime = 0;
         if (mDay >= 20)
         {
@@ -57,12 +61,13 @@ public class TimeManager : MonoBehaviour {
                 mMonthStr = "雪";
             }
         }
+        
         string timemsg = mMonthStr + "    " + mDay.ToString() + "日    " + mDayNight;
         TimePanel.Instance.ShowTimeInfo(timemsg);
-        InvokeRepeating("UpdateTime", 0, 1);
+        //InvokeRepeating("UpdateTime", 0, 1);
     }
 
-    void UpdateTime()
+    public void UpdateTime()
     {
         
         mCurrentTime++;
@@ -78,7 +83,7 @@ public class TimeManager : MonoBehaviour {
         {
             mDay++;
             mDayNight = "昼";
-            //GameEventManager.Instance.NotifySubject(GameEventType.NewDay);
+            GameEventManager.Instance.NotifySubject(GameEventType.NewDay);
             mCurrentTime = 0;
             if (mDay >= 20)
             {
