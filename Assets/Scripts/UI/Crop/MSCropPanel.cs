@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MSCropPanel : BasePanel<MSCropPanel> {
-
-    
-
+public class MSCropPanel : BasePanel<MSCropPanel>
+{
     private Button mWaterBtn;
     private Button mFertilizeBtn;
     private Button mHarvestBtn;
     private Text mWaterEP;
     private Text mFertilizeEP;
     private Text mHarvestEP;
+
 
     public override void Start()
     {

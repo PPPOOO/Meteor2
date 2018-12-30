@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class NPCUI :MonoBehaviour
 {
     public int ID;
-    public NPCInfo NPCinfo=null;
+    public NPCInfo NPCinfo;
     public NPCInfo.NPCType NPCtype;
     protected Animator animator;
     public float MoveSpeed = 1;

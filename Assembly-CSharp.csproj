@@ -65,6 +65,12 @@
     <Compile Include="Assets\Prefabs\Effect\Effects_01\Prefebs\FollowTarget.cs" />
     <Compile Include="Assets\Prefabs\Effect\Effects_02\AnimationSpeed.cs" />
     <Compile Include="Assets\Prefabs\Effect\Effects_02\ScrollUV.cs" />
+    <Compile Include="Assets\Scripts\Business\BusinessManager.cs" />
+    <Compile Include="Assets\Scripts\Business\BusinessStation.cs" />
+    <Compile Include="Assets\Scripts\Business\GoodsChest.cs" />
+    <Compile Include="Assets\Scripts\Business\GoodsChoiceItem.cs" />
+    <Compile Include="Assets\Scripts\Business\GoodsItem.cs" />
+    <Compile Include="Assets\Scripts\Business\GoodsShelf.cs" />
     <Compile Include="Assets\Scripts\Character\AI\AttackState.cs" />
     <Compile Include="Assets\Scripts\Character\AI\ChaseState.cs" />
     <Compile Include="Assets\Scripts\Character\AI\FSMState.cs" />
@@ -94,6 +100,7 @@
     <Compile Include="Assets\Scripts\Crop\CropStation.cs" />
     <Compile Include="Assets\Scripts\GameEvent\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Observes\IGameEventObserves.cs" />
+    <Compile Include="Assets\Scripts\GameEvent\Observes\NewDayObserves\NewDayObserverBusinessManager.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Observes\NewDayObserves\NewDayObserverCropManager.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Subject\IGameEventSubject.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Subject\ItemGetSubject.cs" />
@@ -113,6 +120,12 @@
     <Compile Include="Assets\Scripts\Quest\QuestItemUI.cs" />
     <Compile Include="Assets\Scripts\Quest\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Quest\QuestReward.cs" />
+    <Compile Include="Assets\Scripts\Ranch\RanchAnimalInfo.cs" />
+    <Compile Include="Assets\Scripts\Ranch\RanchAnimalItemChoice.cs" />
+    <Compile Include="Assets\Scripts\Ranch\RanchAnimalUI.cs" />
+    <Compile Include="Assets\Scripts\Ranch\RanchHarvestChest.cs" />
+    <Compile Include="Assets\Scripts\Ranch\RanchnManager.cs" />
+    <Compile Include="Assets\Scripts\Ranch\RanchStation.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillBaseInfo.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillIconDrag.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillManager.cs" />
@@ -131,8 +144,11 @@
     <Compile Include="Assets\Scripts\Tool\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Tool\UIDrag.cs" />
     <Compile Include="Assets\Scripts\Tool\UITool.cs" />
+    <Compile Include="Assets\Scripts\UI\Business\ChoiceGoodsPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Business\GoodsChestPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Business\MSBusinessPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Crop\ChoiceCropPanel.cs" />
-    <Compile Include="Assets\Scripts\UI\Crop\HarvestChestPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Crop\CropHarvestChestPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Crop\MSCropPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Cursor\CursorManager.cs" />
     <Compile Include="Assets\Scripts\UI\HUD\HUDText.cs" />
@@ -161,6 +177,9 @@
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\SkillPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\StatusPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\TimePanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Ranch\ChoiceRanchAnimalPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Ranch\MSRanchPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\Ranch\RanchHarvestChestPanel.cs" />
     <Compile Include="Assets\Scripts\UI\ResidentPanel\FunctionPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Slot\BagSlot.cs" />
     <Compile Include="Assets\Scripts\UI\Slot\PutOnSlot.cs" />

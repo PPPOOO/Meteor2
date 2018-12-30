@@ -44,7 +44,24 @@ public class OtherItemPanel : BaseInventoryPanel
                 }
             }
         }
-
         return seeditemUIs;
+    }
+
+    public List<ItemUI> FindRanchAnimal()
+    {
+        List<ItemUI> RanchAnimalList = new List<ItemUI>();
+        foreach (Slot slot in slotList)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                OtherItem item = slot.transform.GetChild(0).GetComponent<ItemUI>().Item as OtherItem;
+                if (item.OtherType == OtherItem.OtherItemType.Pet)
+                {
+                    ItemUI RanchAnimal = slot.transform.GetChild(0).GetComponent<ItemUI>();
+                    RanchAnimalList.Add(RanchAnimal);
+                }
+            }
+        }
+        return RanchAnimalList;
     }
 }

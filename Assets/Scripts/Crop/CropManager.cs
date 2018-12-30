@@ -46,7 +46,6 @@ public class CropManager: MonoBehaviour
     private void Update()
     {
         CheckDistance();
-
     }
 
 
@@ -78,18 +77,16 @@ public class CropManager: MonoBehaviour
                 
                 IsWater = true;
                 ToolTip.Instance.ShowForTimeInMousePosition("浇水成功！！", 2);
-                ToolTip.Instance.transform.position = Input.mousePosition;
+                MSCropPanel.Instance.Hide();
             }
             else
             {
                 ToolTip.Instance.ShowForTimeInMousePosition("体力不够！！",2);
-                ToolTip.Instance.transform.position = Input.mousePosition; 
             }
         }
         else
         {
             ToolTip.Instance.ShowForTimeInMousePosition("今天浇过水啦！", 2);
-            ToolTip.Instance.transform.position = Input.mousePosition;
         }
     }
 
@@ -107,24 +104,21 @@ public class CropManager: MonoBehaviour
                     }
                     IsFertilize = true;
                     ToolTip.Instance.ShowForTimeInMousePosition("施肥成功！！", 2);
-                    ToolTip.Instance.transform.position = Input.mousePosition;
+                    MSCropPanel.Instance.Hide();
                 }
                 else
                 {
                     ToolTip.Instance.ShowForTimeInMousePosition("体力不够！！", 2);
-                    ToolTip.Instance.transform.position = Input.mousePosition;
                 }
             }
             else
             {
                 ToolTip.Instance.ShowForTimeInMousePosition("必须先浇水才能施肥！", 2);
-                ToolTip.Instance.transform.position = Input.mousePosition;
             }
         }
         else
         {
             ToolTip.Instance.ShowForTimeInMousePosition("今天施过肥啦！", 2);
-            ToolTip.Instance.transform.position = Input.mousePosition;
         }
     }
 
@@ -137,13 +131,13 @@ public class CropManager: MonoBehaviour
                 growCrops[i].Harvest(1);
             }
             ToolTip.Instance.ShowForTimeInMousePosition("收获成功", 2);
-            ToolTip.Instance.transform.position = Input.mousePosition;
+            MSCropPanel.Instance.Hide();
         }
         else
         {
             ToolTip.Instance.ShowForTimeInMousePosition("体力不够！！", 2);
-            ToolTip.Instance.transform.position = Input.mousePosition;
         }
+        
     }
 
     public void CheckDistance()

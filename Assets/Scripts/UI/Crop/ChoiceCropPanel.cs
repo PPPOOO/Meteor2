@@ -36,6 +36,5 @@ public class ChoiceCropPanel : BaseInventoryPanel
     public override void Hide()
     {
         base.Hide();
-        
     }
 }

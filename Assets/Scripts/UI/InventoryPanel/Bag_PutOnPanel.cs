@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Bag_PutOnPanel : BasePanel<Bag_PutOnPanel>
 {
@@ -94,5 +95,16 @@ public class Bag_PutOnPanel : BasePanel<Bag_PutOnPanel>
     public void UpdateCoin()
     {
         CoinCountText.text = PS.CoinCount.ToString();
+    }
+
+
+    public override void Show()
+    {
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1;
+        Tweener tweener = transform.DOMoveX(700, 0.3f);
+        tweener.SetEase(Ease.InOutExpo);
+        var top_idx = gameObject.transform.parent.childCount - 1;
+        gameObject.transform.SetSiblingIndex(top_idx); // 放到顶层
     }
 }

@@ -20,7 +20,7 @@ public class ToolTip : MonoBehaviour
     private Text toolTipText;
     private Text contentText;
     private Canvas canvas;
-    private Vector2 offset =new Vector2 (20, -15);
+    private Vector2 offset =new Vector2 (40, -35);
 
     void Start()
     {

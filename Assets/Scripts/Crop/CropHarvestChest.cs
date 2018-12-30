@@ -7,6 +7,6 @@ public class CropHarvestChest : MonoBehaviour {
     private void OnMouseDown()
     {
         if (MonoBehaviourTool.Instance.GetOverUI() == false) 
-        HarvestChestPanel.Instance.Show();
+        CropHarvestChestPanel.Instance.Show();
     }
 }

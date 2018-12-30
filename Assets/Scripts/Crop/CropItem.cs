@@ -43,7 +43,7 @@ public class CropItem :MonoBehaviour
     {
         if (IsGrown == true)
         {
-            HarvestChestPanel.Instance.StoreItem(Seed.ProductID);
+            CropHarvestChestPanel.Instance.StoreItem(Seed.ProductID);
             Debug.Log(Seed.ProductID);
             //收获箱中获得产物
             CropManager.Instance.RemoveGrowCrop(this);

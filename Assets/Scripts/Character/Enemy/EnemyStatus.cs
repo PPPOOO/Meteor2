@@ -44,11 +44,15 @@ public class EnemyStatus : CharacetStatus
     public override void HPRemainChange(int count)
     {
         base.HPRemainChange(count);
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().GetExp(gameObject.GetComponent<EnemyStatus>().enemy.Exp);
-        IsDead = true;
-        gameObject.GetComponent<EnemyStatus>().animator.SetBool("IsDead", true);
-        QuestManager.Instance.EnemyKilled(gameObject.GetComponent<EnemyStatus>());
-        EnemyManager.Instance.enemyUIsList.Remove(this);
-        Destroy(gameObject, 1f);
+        if (HP_Remain <= 0)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().GetExp(gameObject.GetComponent<EnemyStatus>().enemy.Exp);
+            IsDead = true;
+            gameObject.GetComponent<EnemyStatus>().animator.SetBool("IsDead", true);
+            QuestManager.Instance.EnemyKilled(gameObject.GetComponent<EnemyStatus>());
+            EnemyManager.Instance.enemyUIsList.Remove(this);
+            Destroy(gameObject, 1f);
+        }
+        
     }
 }

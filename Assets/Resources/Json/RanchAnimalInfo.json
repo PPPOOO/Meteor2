@@ -1,0 +1,16 @@
+﻿[
+{"id":1,
+"name":"花猪",
+"animation": "Pig",
+"daygrow":5,
+"maxgrow":50,
+"productid":71
+},
+{"id":2,
+"name":"奶牛",
+"animation": "Cow",
+"daygrow":10,
+"maxgrow":50,
+"productid":72
+}
+]
