@@ -15,7 +15,6 @@ public class AttackState : FSMState
         mAttackTimer += Time.deltaTime;
         if (mAttackTimer >= mAttacktTime)
         {
-            Debug.Log(mGameObject.GetComponent<CharacetStatus>().AD);
             mPlayer.GetComponent<CharacetStatus>().HPRemainChange(-mGameObject.GetComponent<CharacetStatus>().AD);
             mAttackTimer = 0;
         }

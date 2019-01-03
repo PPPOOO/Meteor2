@@ -7,11 +7,11 @@ public class PlayerMove : MonoBehaviour
 
 
     private PlayerStatus ps;
-    private float move_distance = 1f;
     private Animator animator;
     private Vector3 targetpos;
     private Vector3 xiangdui_pos;
-
+    public float x;
+    public float y;
     
 
    void Start()
@@ -35,8 +35,8 @@ public class PlayerMove : MonoBehaviour
 
     public void KeyToMove()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+         x = Input.GetAxisRaw("Horizontal");
+         y = Input.GetAxisRaw("Vertical");
         if (y != 0)
         {
             animator.SetFloat("y", y);

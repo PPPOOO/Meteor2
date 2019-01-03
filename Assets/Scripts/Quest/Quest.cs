@@ -17,6 +17,7 @@ public class Quest
     public int Count;
     public int KillCount;
     public int EnemyID;
+    public QuestStatus CurrentStatus;
 
     public Quest(int id,string name,string des,QuestType questType,int npcid, QuestReward questRewards)
     {
@@ -28,6 +29,7 @@ public class Quest
         QuestRewards = questRewards;
         SetTypeIcon();
         Queststatus = QuestStatus.None;
+        CurrentStatus = Queststatus;
     }
 
     //杀敌任务

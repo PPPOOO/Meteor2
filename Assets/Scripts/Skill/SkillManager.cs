@@ -59,7 +59,6 @@ public class SkillManager : MonoSingleton<SkillManager>
 
     IEnumerator ProduceEffect(GameObject gameObject, AttrType attrType, float value, int count = 1, float time = 0)
     {
-        Debug.Log(attrType);
         for (int i = 0; i < count; i++)
         {
             if (gameObject == null) break;

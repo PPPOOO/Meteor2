@@ -23,6 +23,8 @@ public class ShortcutSlot : MonoBehaviour, IPointerDownHandler
     private SkillBaseInfo mInfo;
     private PlayerStatus mPlayerStatus;
     private PlayerAct mPlayerAct;
+    private Image MaskIcon;
+    private Text CoolTime;
 
     void Start()
     {
@@ -30,6 +32,11 @@ public class ShortcutSlot : MonoBehaviour, IPointerDownHandler
         mPlayerAct = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAct>();
         mIcon = UITool.FindChild<Image>(gameObject, "Image");
         mIcon.gameObject.SetActive(false);
+        MaskIcon = UITool.FindChild<Image>(gameObject, "Mask");
+        MaskIcon.fillAmount = 0;
+        CoolTime = UITool.FindChild<Text>(gameObject, "CoolTime");
+        CoolTime.enabled = false;
+
     }
 
     private void Update()
@@ -42,16 +49,38 @@ public class ShortcutSlot : MonoBehaviour, IPointerDownHandler
             }
             else if (type == ShortcutType.Skill)
             {
+                if (MaskIcon.fillAmount>0) return;
                 bool mp = mPlayerStatus.TakeMP(mInfo.MP);
                 bool ep = mPlayerStatus.TakeEP(mInfo.EP);
                 if (mp && ep)
                 {
                     mPlayerAct.UseSkill(mInfo);
+                    MaskIcon.fillAmount = 1;
+                    CoolTime.enabled = true;
+                    CoolTime.text = mInfo.CoolTime + "s";
+                    StartCoroutine(StartSkillCD(mInfo));
                 }
             }
             else
             {
                 return;
+            }
+        }
+    }
+
+    IEnumerator StartSkillCD(SkillBaseInfo skillBaseInfo)
+    {
+        float curTime = 0;
+        while (1>0)
+        {
+            yield return new WaitForSeconds(0.1f);
+            curTime += 0.1f;
+            CoolTime.text = (skillBaseInfo.CoolTime - curTime).ToString("F1")+ "s";
+            MaskIcon.fillAmount = 1 - (curTime / skillBaseInfo.CoolTime);
+            if(curTime>= skillBaseInfo.CoolTime)
+            {
+                CoolTime.enabled = false;
+                break;
             }
         }
     }
@@ -97,6 +126,7 @@ public class ShortcutSlot : MonoBehaviour, IPointerDownHandler
                 type = ShortcutType.None;
                 mIcon.gameObject.SetActive(false);
             }
+            
         }
     }
 }

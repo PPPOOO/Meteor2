@@ -27,9 +27,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             transform.GetChild(0).GetComponent<ItemUI>().AddAmount(count);
         }
-
-        
-
+        if(transform.parent.parent.name== "Bag_PutOnPanel")
+        {
+            InventoryManager.Instance.ItemChange(item, count);
+        }
     }
 
     #region 得到当前格子里的物品类型，物品id，和是否达到数量上限。主要用于储存新物品时对背包内格子物品的检测

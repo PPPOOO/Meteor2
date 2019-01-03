@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Character\Player\PlayerAct.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatus.cs" />
+    <Compile Include="Assets\Scripts\Character\WeaponAttack\WeaponAttack.cs" />
     <Compile Include="Assets\Scripts\Crop\CrolLand.cs" />
     <Compile Include="Assets\Scripts\Crop\CropHarvestChest.cs" />
     <Compile Include="Assets\Scripts\Crop\CropItem.cs" />
@@ -126,6 +127,11 @@
     <Compile Include="Assets\Scripts\Ranch\RanchHarvestChest.cs" />
     <Compile Include="Assets\Scripts\Ranch\RanchnManager.cs" />
     <Compile Include="Assets\Scripts\Ranch\RanchStation.cs" />
+    <Compile Include="Assets\Scripts\SceneState\ISceneState.cs" />
+    <Compile Include="Assets\Scripts\SceneState\MainMenuState.cs" />
+    <Compile Include="Assets\Scripts\SceneState\MainState.cs" />
+    <Compile Include="Assets\Scripts\SceneState\SceneStateController.cs" />
+    <Compile Include="Assets\Scripts\SceneState\StartState.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillBaseInfo.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillIconDrag.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillManager.cs" />

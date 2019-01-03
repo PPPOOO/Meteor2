@@ -56,7 +56,20 @@
         "type": "GetItem",
 		"npcid":3,
 		"itemid":64,
-		"count":1,
+		"count":3,
+        "reward": {
+            "coin": 30,
+            "exp": 30
+        }
+    },
+    {
+        "id": 6,
+        "name": "猪肉",
+        "des": "村民A想要2个猪肉",
+        "type": "GetItem",
+		"npcid":3,
+		"itemid":71,
+		"count":2,
         "reward": {
             "coin": 30,
             "exp": 30

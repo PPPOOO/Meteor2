@@ -49,7 +49,7 @@ public class BagSlot : Slot
             if (PickedItem.Instance.IsPickedItem==false)
             {
                 PickedItem.Instance.SetPickItem(currentItem.Item.ID, currentItem.Amount);
-                Destroy(currentItem.gameObject);//销毁当前物品
+                currentItem.ReduceAmount(currentItem.Amount);
             }
             else
             {

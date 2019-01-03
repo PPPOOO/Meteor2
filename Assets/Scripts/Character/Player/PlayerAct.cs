@@ -8,17 +8,33 @@ public class PlayerAct : MonoBehaviour
     private Transform Target_normalattack;
     public bool IsNormalAttack=false;
     public GameObject EffectPrefab;
+    public Animator animator;
 
+    public bool IsWeaponAttack = false;
+    public GameObject WeaponGoPrefab;
+    public float WeaponTimer = 0;
+    private Transform WeaponDownPos;
+    private Transform WeaponUpPos;
+    private Transform WeaponRightPos;
+    private Transform WeaponLeftPos;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         PM = GetComponent<PlayerMove>();
         PS = GetComponent<PlayerStatus>();
+        GetWeaponInfo();
     }
 
 
     private void Update()
     {
+        
+        WeaponTimer += Time.deltaTime;
+        if(WeaponTimer>=1/PS.AttackRate&& Input.GetKey(KeyCode.F))
+        {
+            WeaponAttack();
+        }
         if (Input.GetMouseButtonDown(1))
         {
 
@@ -62,8 +78,41 @@ public class PlayerAct : MonoBehaviour
         }
     }
 
+    private void GetWeaponInfo()
+    {
+        WeaponGoPrefab = Resources.Load<GameObject>("Weapon");
+        WeaponDownPos = UITool.FindChild<Transform>(gameObject, "Down");
+        WeaponUpPos = UITool.FindChild<Transform>(gameObject, "Up");
+        WeaponRightPos = UITool.FindChild<Transform>(gameObject, "Right");
+        WeaponLeftPos = UITool.FindChild<Transform>(gameObject, "Left");
+    }
 
-
+    private void WeaponAttack()
+    {
+        GameObject go = null;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Down"))
+        {
+            go = Instantiate(WeaponGoPrefab, WeaponDownPos);
+            go.GetComponent<WeaponAttack>().weaponDir = global::WeaponAttack.WeaponDir.Down;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Up"))
+        {
+            go = Instantiate(WeaponGoPrefab, WeaponUpPos);
+            go.GetComponent<WeaponAttack>().weaponDir = global::WeaponAttack.WeaponDir.Up;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Right"))
+        {
+            go = Instantiate(WeaponGoPrefab, WeaponRightPos);
+            go.GetComponent<WeaponAttack>().weaponDir = global::WeaponAttack.WeaponDir.Right;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Left"))
+        {
+            go = Instantiate(WeaponGoPrefab, WeaponLeftPos);
+            go.GetComponent<WeaponAttack>().weaponDir = global::WeaponAttack.WeaponDir.Left;
+        }
+        go.transform.localPosition = Vector3.zero;
+        WeaponTimer = 0;
+    }
     public void UseSkill(SkillBaseInfo skillBaseInfo)
     {
         switch (skillBaseInfo.Type)

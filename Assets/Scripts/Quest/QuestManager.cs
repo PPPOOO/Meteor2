@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestManager : MonoSingleton<QuestManager> {
-
-
+    
     public List<Quest> QuestList;
     public List<QuestItemUI> AcceptQuestList = new List<QuestItemUI>();//任务
     public List<QuestItemUI> StartQuestList = new List<QuestItemUI>();//talk类任务才有
     public List<QuestItemUI> FinishQuestList = new List<QuestItemUI>();//
     public List<QuestItemUI> CanDeleteQuestList = new List<QuestItemUI>();
+    
 
 
     public List<QuestItemUI> KillEnemyList = new List<QuestItemUI>();
     public bool IsKillEnemyQuest = false;
 
-    public List<QuestItemUI> QuestItemUIsList = new List<QuestItemUI>();
+    public List<QuestItemUI> QuestItemUIList = new List<QuestItemUI>();
+    public bool IsItemQuest = false;
 
     protected override void Awake()
     {
@@ -24,13 +25,7 @@ public class QuestManager : MonoSingleton<QuestManager> {
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log(CanDeleteQuestList.Count);
-        }
-    }
+
 
     public void UpdateQuestShow()
     {
@@ -53,7 +48,6 @@ public class QuestManager : MonoSingleton<QuestManager> {
     public void AddAcceptQuestList(QuestItemUI questui)
     {
         AcceptQuestList.Add(questui);
-        
         switch (questui.Quest.Questtype)
         {
             case Quest.QuestType.Combat:
@@ -79,8 +73,13 @@ public class QuestManager : MonoSingleton<QuestManager> {
                 questui.UpdateShowDes("找到" + NPCManager.Instance.GetNPCByID(questui.Quest.StartNPCID).Name);
                 break;
             case Quest.QuestType.GetItem:
+                IsItemQuest = true;
                 InventoryManager.Instance.GetItemQuest(questui);
 
+                if (QuestItemUIList.Contains(questui) == false)
+                {
+                    QuestItemUIList.Add(questui);
+                }
                 foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
                 {
                     if (questui.Quest.NPCID == npc.ID)
@@ -99,26 +98,6 @@ public class QuestManager : MonoSingleton<QuestManager> {
                 break;
             case Quest.QuestType.Work:
                 break;
-        }
-    }
-
-    public void EnemyKilled(EnemyStatus enemyStatus)
-    {
-        if (IsKillEnemyQuest == false) return;
-        else
-        {
-            foreach(QuestItemUI  questItemUI in KillEnemyList)
-            {
-                if( questItemUI.Quest.EnemyID == enemyStatus.ID)
-                {
-                    questItemUI.CurrentKillCount++;
-                    questItemUI.UpdateShowDes(questItemUI.CurrentKillCount);
-                    if (questItemUI.CurrentKillCount >= questItemUI.Quest.KillCount&& FinishQuestList.Contains(questItemUI)==false)
-                    {
-                        AddFinishQuestList(questItemUI);
-                    }
-                }
-            }
         }
     }
 
@@ -193,15 +172,24 @@ public class QuestManager : MonoSingleton<QuestManager> {
 
     public void AddCanDeleteQuestList(QuestItemUI questui)
     {
-        if (questui.Quest.Questtype == Quest.QuestType.Combat)
+        
+        if (QuestItemUIList.Contains(questui))
+        {
+            if (QuestItemUIList.Count <= 1)
+            {
+                IsItemQuest = false;
+            }
+            QuestItemUIList.Remove(questui);
+        }
+        if (KillEnemyList.Contains(questui))
         {
             if (KillEnemyList.Count <= 1)
             {
                 IsKillEnemyQuest = false;
             }
             KillEnemyList.Remove(questui);
-
         }
+
         CanDeleteQuestList.Add(questui);
         RemoveFinishQuestList(questui);
     }
@@ -210,6 +198,65 @@ public class QuestManager : MonoSingleton<QuestManager> {
         CanDeleteQuestList.Remove(questui);
     }
     #endregion
+
+    public void EnemyKilled(EnemyStatus enemyStatus)
+    {
+        if (IsKillEnemyQuest == false) return;
+        else
+        {
+            foreach (QuestItemUI questItemUI in KillEnemyList)
+            {
+                if (questItemUI.Quest.EnemyID == enemyStatus.ID)
+                {
+                    questItemUI.CurrentKillCount++;
+                    questItemUI.UpdateShowDes(questItemUI.CurrentKillCount);
+                    if (questItemUI.CurrentKillCount >= questItemUI.Quest.KillCount && FinishQuestList.Contains(questItemUI) == false)
+                    {
+                        AddFinishQuestList(questItemUI);
+                    }
+                }
+            }
+        }
+    }
+
+    public void GetQuestItem(Item changeitem, int changecount = 1)
+    {
+        for (int i = 0; i < QuestItemUIList.Count; i++)
+        {
+            if (changeitem.ID == QuestItemUIList[i].Quest.ItemID)
+            {
+                QuestItemUIList[i].CurrentCount += changecount;
+                if (QuestItemUIList[i].CurrentCount <= 0)
+                {
+                    QuestItemUIList[i].CurrentCount = 0;
+                }
+                QuestItemUIList[i].UpdateShowDes(QuestItemUIList[i].CurrentCount);
+                NPCUI npcUI = null;
+                foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
+                {
+                    if (QuestItemUIList[i].Quest.NPCID == npc.ID)
+                    {
+                        npcUI = npc;
+                    }
+                }
+                if (QuestItemUIList[i].CurrentCount >= QuestItemUIList[i].Quest.Count && FinishQuestList.Contains(QuestItemUIList[i]) == false)
+                {
+                    AddFinishQuestList(QuestItemUIList[i]);
+                }
+                if (QuestItemUIList[i].CurrentCount < QuestItemUIList[i].Quest.Count && FinishQuestList.Contains(QuestItemUIList[i]) == true)
+                {
+                    AddAcceptQuestList(QuestItemUIList[i]);
+                    RemoveFinishQuestList(QuestItemUIList[i]);
+                    if (npcUI.FinishQuestuiList.Count <= 1)
+                    {
+                        npcUI.IsFinishQuest = false;
+                    }
+                    npcUI.FinishQuestuiList.Remove(npcUI.FinishQuestuiList[npcUI.FinishQuestuiList.Count - 1]);
+                    npcUI.HideFinishIcon();
+                }
+            }
+        }
+    }
 
     public void ParseQuestInfo()
     {

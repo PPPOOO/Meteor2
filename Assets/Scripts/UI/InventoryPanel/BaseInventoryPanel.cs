@@ -53,11 +53,6 @@ public class BaseInventoryPanel : MonoSingleton<BaseInventoryPanel>
             else
             {
                 slot.StoreItem(item, count);//把物品存储到这个空的物品槽里面
-                if (transform.name != "ShopPanel" && InventoryManager.Instance.IsQuestClear == false)
-                {
-                    InventoryManager.Instance.CheckItemIsQuest(item, count);
-
-                }
             }
         }
         else
@@ -66,10 +61,6 @@ public class BaseInventoryPanel : MonoSingleton<BaseInventoryPanel>
             if (slot != null)
             {
                 slot.StoreItem(item, count);
-                if (transform.name != "ShopPanel" && InventoryManager.Instance.IsQuestClear == false)
-                {
-                    InventoryManager.Instance.CheckItemIsQuest(item, count);
-                }
             }
             else
             {
@@ -77,10 +68,6 @@ public class BaseInventoryPanel : MonoSingleton<BaseInventoryPanel>
                 if (emptySlot != null)
                 {
                     emptySlot.StoreItem(item, count);
-                    if (transform.name != "ShopPanel" && InventoryManager.Instance.IsQuestClear == false)
-                    {
-                        InventoryManager.Instance.CheckItemIsQuest(item, count);
-                    }
                 }
                 else
                 {
@@ -116,10 +103,6 @@ public class BaseInventoryPanel : MonoSingleton<BaseInventoryPanel>
                 i++;
                 if (i >= count)
                 {
-                    if (InventoryManager.Instance.IsQuestClear == false)
-                    {
-                        InventoryManager.Instance.CheckItemIsQuest(item, -count);
-                    }
                     return true;
                 }
             }

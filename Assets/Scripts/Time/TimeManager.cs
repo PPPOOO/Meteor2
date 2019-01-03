@@ -43,9 +43,7 @@ public class TimeManager : MonoBehaviour {
 
         //Debug.Log(IsInvoking());
         //CancelInvoke();
-        Debug.Log(mDay);
         mDay++;
-        Debug.Log(mDay);
         GameEventManager.Instance.NotifySubject(GameEventType.NewDay);
         mCurrentTime = 0;
         if (mDay >= 20)

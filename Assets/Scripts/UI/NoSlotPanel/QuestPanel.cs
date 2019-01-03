@@ -39,8 +39,6 @@ public class QuestPanel : BasePanel<QuestPanel>
             
         }
         QuestItemUI[] questItemUIs = Content.GetComponentsInChildren<QuestItemUI>();
-        Debug.Log(questItemUIs.Length);
-        Debug.Log(QuestManager.Instance.CanDeleteQuestList.Count);
         foreach (QuestItemUI questui in QuestManager.Instance.CanDeleteQuestList)
         {
 

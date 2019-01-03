@@ -15,8 +15,7 @@ public class NPCUI :MonoBehaviour
     private GameObject HUDPrefab;
     private Transform HUDPanel;
 
-
-
+    
 
     public bool IsQuestTarget = false;
     public bool IsStartNPC = false;
@@ -82,7 +81,7 @@ public class NPCUI :MonoBehaviour
     {
         while (1 > 0)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
             if (NPCTalkPanel.Instance.IsClickFinshQuest)
             {
                 NPCTalkContentPanel.Instance.ShowContent(NPCinfo.Name, "多谢了!");
@@ -110,9 +109,6 @@ public class NPCUI :MonoBehaviour
                     NPCTaklQuest.Remove(NPCTaklQuest[NPCTaklQuest.Count - 1]);
                     HideQuestIcon();
                 }
-                
-                else
-                {
                     switch (NPCQuestuis[NPCQuestuis.Count-1].Quest.Questtype)
                     {
                         case Quest.QuestType.Combat:
@@ -135,7 +131,6 @@ public class NPCUI :MonoBehaviour
                         case Quest.QuestType.Work:
                             break;
                     }
-                }
                 break;
             }
             else if (NPCTalkPanel.Instance.IsClickAcceptQuest)
@@ -201,7 +196,8 @@ public class NPCUI :MonoBehaviour
 
     public void HideFinishIcon()
     {
-        Destroy(transform.Find("TargetFinish(Clone)").gameObject);
+        if (transform.Find("TargetFinish(Clone)") != null)
+            Destroy(transform.Find("TargetFinish(Clone)").gameObject);
     }
 
 

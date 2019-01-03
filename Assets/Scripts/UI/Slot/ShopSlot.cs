@@ -74,10 +74,7 @@ public class ShopSlot : Slot
             if (ConfirmPanel.Instance.IsClickOK)
             {
                 ps.CoinUP(item.SellPrice*count);
-                if (InventoryManager.Instance.IsQuestClear == false)
-                {
-                    InventoryManager.Instance.CheckItemIsQuest(item, -count);
-                }
+                InventoryManager.Instance.ItemChange(item, -count);
                 PickedItem.Instance.Hide();
                 break;
             }

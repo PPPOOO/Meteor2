@@ -28,10 +28,6 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
         TypeIcon.sprite = Quest.TypeIcon;
         Des.text = Quest.Des;
         Reward.text = Quest.QuestRewards.Coin + "金币  " + Quest.QuestRewards.Exp + "经验";
-        if(transform.parent.name== "QuestContent")
-        {
-            QuestManager.Instance.QuestItemUIsList.Add(this);
-        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -76,7 +72,7 @@ public class QuestItemUI : MonoBehaviour,IPointerDownHandler
     {
         while (1 > 0)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
             if (ConfirmPanel.Instance.IsClickOK)
             {
                 QuestManager.Instance.AddAcceptQuestList(this);

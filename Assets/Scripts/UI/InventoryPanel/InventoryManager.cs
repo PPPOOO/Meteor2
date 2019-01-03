@@ -18,9 +18,7 @@ public class InventoryManager : MonoBehaviour
             return _instance;
         }
     }
-
-    public bool IsQuestClear = true;
-    public List<QuestItemUI> questItemUIs = new List<QuestItemUI>();
+    
     public List<Item> itemList;
     protected  void Awake()
     {
@@ -66,11 +64,20 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void ItemChange(Item changeitem,int changecount=1)
+    {
+        Item item = changeitem;
+        int count = changecount;
+        if (QuestManager.Instance.IsItemQuest == true)
+        {
+            QuestManager.Instance.GetQuestItem(item, count);
+        }
+    }
+
 
     public void GetItemQuest(QuestItemUI questItemUI)
     {
-        IsQuestClear = false;
-        questItemUIs.Add(questItemUI);
+        
         switch (GetItemById(questItemUI.Quest.ItemID).Type)
         {
             case Item.ItemType.Consumable:
@@ -90,7 +97,7 @@ public class InventoryManager : MonoBehaviour
 
     public void FindQuestItem(Slot[] slotList )
     {
-        foreach (QuestItemUI questItemUI in questItemUIs)
+        foreach (QuestItemUI questItemUI in QuestManager.Instance.QuestItemUIList)
         {
             int Count = 0;
             foreach (Slot slot in slotList)
@@ -109,7 +116,7 @@ public class InventoryManager : MonoBehaviour
 
     public void CheckItemIsQuest(Item item,int count=1)
     {
-        foreach (QuestItemUI questItemUI in questItemUIs)
+        foreach (QuestItemUI questItemUI in QuestManager.Instance.QuestItemUIList)
         {
             if(item.ID== questItemUI.Quest.ItemID)
             {
@@ -117,17 +124,8 @@ public class InventoryManager : MonoBehaviour
             }
             questItemUI.UpdateShowDes(questItemUI.CurrentCount);
             
-            if (questItemUI.CurrentCount >= questItemUI.Quest.Count)
-            {
-                foreach (NPCUI npc in NPCManager.Instance.QuestNPCList)
-                {
-                    if (questItemUI.Quest.NPCID == npc.ID)
-                    {
-                        npc.HideQuestIcon();
-                        QuestManager.Instance.AddFinishQuestList(questItemUI);
-                    }
-                }
-            }
+            
+            
         }
     }
 

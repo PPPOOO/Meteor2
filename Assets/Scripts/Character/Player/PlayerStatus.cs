@@ -66,6 +66,7 @@ public class PlayerStatus : CharacetStatus {
         if (Point_remain >= 1)
         {
             Strength_plus++;
+            STR++;
             Point_remain -= 1;
             StatusPanel.Instance.UpdateStatusPanel();
         }
@@ -75,6 +76,7 @@ public class PlayerStatus : CharacetStatus {
         if (Point_remain >= 1)
         {
             Agility_plus++;
+            AGI++;
             Point_remain -= 1;
             StatusPanel.Instance.UpdateStatusPanel();
         }
@@ -84,6 +86,7 @@ public class PlayerStatus : CharacetStatus {
         if (Point_remain >= 1)
         {
             Magic_plus++;
+            MAG++;
             Point_remain -= 1;
             StatusPanel.Instance.UpdateStatusPanel();
         }
@@ -93,6 +96,7 @@ public class PlayerStatus : CharacetStatus {
         if (Point_remain >= 1)
         {
             Vitality_plus++;
+            VIT++;
             Point_remain -= 1;
             StatusPanel.Instance.UpdateStatusPanel();
         }

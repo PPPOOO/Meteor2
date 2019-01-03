@@ -46,13 +46,21 @@ public class HUDText : MonoBehaviour
         if (target != null)
         {
             aa = Vector3.MoveTowards(aa, bb, 0.03f);
+            
             Vector3 GTSPos = RectTransformUtility.WorldToScreenPoint(Camera.main, aa);
-            Vector3 worldPoint;
-            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, GTSPos, null, out worldPoint))
-            {
-                transform.position = worldPoint;
-            }
-            r_Transform.anchoredPosition3D = worldPoint;
+            
+
+
+            Vector2 uisize = canvas.GetComponent<RectTransform>().sizeDelta;//得到画布的尺寸
+            Vector2 screenpos = Camera.main.WorldToScreenPoint(aa);//将世界坐标转换为屏幕坐标
+            Vector2 screenpos2;
+            screenpos2.x = screenpos.x;//转换为以屏幕中心为原点的屏幕坐标
+            screenpos2.y = screenpos.y ;
+            Vector2 uipos;
+            uipos.x = (screenpos2.x / Screen.width) * uisize.x;
+            uipos.y = (screenpos2.y / Screen.height) * uisize.y;//得到UGUI的anchoredPosition
+            //r_Transform.anchoredPosition3D = GTSPos;
+            r_Transform.anchoredPosition3D = uipos;
         }
     }
 }

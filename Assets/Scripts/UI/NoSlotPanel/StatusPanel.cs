@@ -51,10 +51,14 @@ public class StatusPanel : BasePanel<StatusPanel>
     {
         mName.text = ps.Name;
         mLV.text = ps.Level.ToString();
-        mStrTt.text = ((int)(ps.STR + ps.Strength_plus) + PutOnPanel.Instance.Str).ToString();
-        mAgiTt.text = ((int)(ps.AGI + ps.Agility_plus) + PutOnPanel.Instance.Agi).ToString();
-        mMagTt.text = ((int)(ps.MAG + ps.Magic_plus) + PutOnPanel.Instance.Mag).ToString();
-        mVitTt.text = ((int)(ps.VIT + ps.Vitality_plus) + PutOnPanel.Instance.Vit).ToString();
+        //mStrTt.text = ((int)(ps.STR + ps.Strength_plus) + PutOnPanel.Instance.Str).ToString();
+        //mAgiTt.text = ((int)(ps.AGI + ps.Agility_plus) + PutOnPanel.Instance.Agi).ToString();
+        //mMagTt.text = ((int)(ps.MAG + ps.Magic_plus) + PutOnPanel.Instance.Mag).ToString();
+        //mVitTt.text = ((int)(ps.VIT + ps.Vitality_plus) + PutOnPanel.Instance.Vit).ToString();
+        mStrTt.text = ps.STR.ToString();
+        mAgiTt.text = ps.AGI.ToString();
+        mMagTt.text = ps.MAG.ToString();
+        mVitTt.text = ps.VIT.ToString();
         mRemainPoint.text = ps.Point_remain.ToString();
         mDmgTt.text = PutOnPanel.Instance.Damage.ToString();
         mHPTt.text =  ps.HP.ToString();

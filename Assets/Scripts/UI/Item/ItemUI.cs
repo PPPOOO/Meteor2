@@ -31,7 +31,10 @@ public class ItemUI : MonoBehaviour
     {
         this.Amount -= amount;
         LitimCapacityShow();
-
+        if (transform.parent.parent.parent.name == "Bag_PutOnPanel")
+        {
+            InventoryManager.Instance.ItemChange(Item, -amount);
+        }
         if (Amount <= 0)
         {
             Destroy(gameObject);
