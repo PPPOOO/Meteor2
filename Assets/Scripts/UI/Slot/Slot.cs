@@ -69,7 +69,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     //手上物品与格子的各种交互情况
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-
         if (eventData.button == PointerEventData.InputButton.Right) //右键当前格子 
         {
             if (PickedItem.Instance.IsPickedItem == false && transform.childCount > 0)

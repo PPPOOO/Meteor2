@@ -254,7 +254,7 @@ public class JSONObject {
 	public JSONObject(string str, int maxDepth = -2, bool storeExcessLevels = false, bool strict = false) {	//create a new JSONObject from a string (this will also create any children, and parse the whole string)
 		Parse(str, maxDepth, storeExcessLevels, strict);
 	}
-	 void Parse(string str, int maxDepth = -2, bool storeExcessLevels = false, bool strict = false) {
+	void Parse(string str, int maxDepth = -2, bool storeExcessLevels = false, bool strict = false) {
 		if(!string.IsNullOrEmpty(str)) {
 			str = str.Trim(WHITESPACE);
 			if(strict) {

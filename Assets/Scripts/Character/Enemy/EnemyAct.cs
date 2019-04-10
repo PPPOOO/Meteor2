@@ -9,7 +9,6 @@ public class EnemyAct : MonoBehaviour
     private SpriteRenderer mSR;
     private Color mNormalColor;
     public AudioClip mTakeDamage;
-    private bool mIsDead = false;
     private PlayerStatus mPS;
 
     public void Start()
@@ -23,10 +22,14 @@ public class EnemyAct : MonoBehaviour
 
     public void Update()
     {
-        if (mIsDead == false)
+        if (EnemyStatus.IsDead== false)
         {
             mFSM.currentState.Reason();
             mFSM.currentState.Act();
+        }
+        else
+        {
+            Debug.Log("dead");
         }
     }
     private void MakeFSM()
@@ -77,18 +80,10 @@ public class EnemyAct : MonoBehaviour
 
     public void TakeDamage(int attack)
     {
-        if (mIsDead == true) return;
+        if (EnemyStatus.IsDead == true) return;
         AudioSource.PlayClipAtPoint(mTakeDamage, transform.position);
         EnemyStatus.HPRemainChange(attack);
         StartCoroutine(ShowBodyRed());
-        if (EnemyStatus.HP_Remain <= 0)
-        {
-            mPS.GetExp(EnemyStatus.enemy.Exp);
-            mIsDead = true;
-            EnemyStatus.animator.SetBool("IsDead", true);
-            QuestManager.Instance.EnemyKilled(EnemyStatus);
-            Destroy(gameObject, 1f);
-        }
     }
 
     IEnumerator ShowBodyRed()

@@ -51,20 +51,20 @@ public class StatusPanel : BasePanel<StatusPanel>
     {
         mName.text = ps.Name;
         mLV.text = ps.Level.ToString();
-        //mStrTt.text = ((int)(ps.STR + ps.Strength_plus) + PutOnPanel.Instance.Str).ToString();
-        //mAgiTt.text = ((int)(ps.AGI + ps.Agility_plus) + PutOnPanel.Instance.Agi).ToString();
-        //mMagTt.text = ((int)(ps.MAG + ps.Magic_plus) + PutOnPanel.Instance.Mag).ToString();
-        //mVitTt.text = ((int)(ps.VIT + ps.Vitality_plus) + PutOnPanel.Instance.Vit).ToString();
-        mStrTt.text = ps.STR.ToString();
-        mAgiTt.text = ps.AGI.ToString();
-        mMagTt.text = ps.MAG.ToString();
-        mVitTt.text = ps.VIT.ToString();
+        mStrTt.text = ((int)(ps.STR + ps.Strength_plus) + PutOnPanel.Instance.Str).ToString();
+        mAgiTt.text = ((int)(ps.AGI + ps.Agility_plus) + PutOnPanel.Instance.Agi).ToString();
+        mMagTt.text = ((int)(ps.MAG + ps.Magic_plus) + PutOnPanel.Instance.Mag).ToString();
+        mVitTt.text = ((int)(ps.VIT + ps.Vitality_plus) + PutOnPanel.Instance.Vit).ToString();
+        //mStrTt.text = ps.STR.ToString();
+        //mAgiTt.text = ps.AGI.ToString();
+        //mMagTt.text = ps.MAG.ToString();
+        //mVitTt.text = ps.VIT.ToString();
         mRemainPoint.text = ps.Point_remain.ToString();
         mDmgTt.text = PutOnPanel.Instance.Damage.ToString();
-        mHPTt.text =  ps.HP.ToString();
-        mMPTt.text =  ps.MP.ToString();
-        mEnergyTt.text =  ps.EP.ToString();
-        mHungerTt.text =  ps.Hunger.ToString();
+        mHPTt.text =  ps.HP_Remain.ToString();
+        mMPTt.text =  ps.MP_Remain.ToString();
+        mEnergyTt.text =  ps.EP_Remain.ToString();
+        mHungerTt.text =  ps.Hunger_Remain.ToString();
         mExp.text = "经验 " + ps.Exp + "/" + ps.Total_exp;
 
         UpdateBtn();

@@ -33,7 +33,7 @@ public class ShopPanel : BaseInventoryPanel
     public override void Show()
     {
         base.Show();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 16; i++)
         {
             int randomnum = Random.Range(0, InventoryManager.Instance.itemList.Count);
             StoreItem(InventoryManager.Instance.itemList[randomnum].ID);

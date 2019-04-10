@@ -1,7 +1,9 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/pop/Desktop/11/Meteor2.exe
+C:/Users/pop/Desktop/unity/demo/mt/Meteor2.exe
 SceneListBegin?
+Assets/Scenes/01StartScene.unity
+Assets/Scenes/02CreatCharacterScene.unity
 Assets/Scenes/03MainScene.unity
 SceneListEnd?
 7b4cc1a2602cc61fce1a1381e5368329 Assembly-CSharp.dll:.GoodsChestPanel
@@ -187,7 +189,7 @@ fde791846835f3419cf543b87e8549d1 Assembly-CSharp-firstpass.dll:Cinemachine.Cinem
 7b4cc1a2602cc61fce1a1381e5368329 Assembly-CSharp.dll:.BaseInventoryPanel
 955908a8496a26b5bfe227ee6320e1cb Assembly-CSharp.dll:.CharacetStatus
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ShopSlot
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.PlayerMove
+a0e1cb827dc302c460ac85a6cead9349 Assembly-CSharp.dll:.PlayerMove
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.QuestPanel
 964188dcc9c94a32ddc7bbabd36a44c1 Assembly-CSharp-firstpass.dll:Cinemachine.CinemachineDollyCart
 257d9c08ba56b521aab1269cdad8cfdb Assembly-CSharp.dll:.BagSlot
@@ -256,6 +258,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 dffc847d2ac856be4ea8854e1024e5b6 Assembly-CSharp.dll:.ConfirmPanel
 013e332450b2cbb92cb0746943fc27e2 Assembly-CSharp.dll:.RanchAnimalUI
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.SceneStateController
 a5df3ae7071abaae1603fae321e34d56 Assembly-CSharp-firstpass.dll:Cinemachine.CinemachineCollider
 15320b6936160df5b889e031a8802ff7 Assembly-CSharp-firstpass.dll:Cinemachine.CinemachineBlenderSettings
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
@@ -276,17 +279,19 @@ f5ece19966a893bd3def5b7aaf85514d Assembly-CSharp-firstpass.dll:UnityEngine.Tilem
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.Sleep
 1d16872efe518ce325c00cc3b228ccbe Assembly-CSharp.dll:.FollowTarget
 26fc01b590cd984d11332cdfc4534771 Assembly-CSharp.dll:.QuestManager
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.EscPanel
 ebc31dc7976aeffcc84e23b049016bd0 Assembly-CSharp.dll:.HUDText
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 d946149e042d355cdac666c635a43bcc Assembly-CSharp.dll:.NPCUIFix
 6f4b73a526fab5993b22cb9fce6ee6ff Assembly-CSharp.dll:.EnemyManager
 7b4cc1a2602cc61fce1a1381e5368329 Assembly-CSharp.dll:.ChestPanel
-18978685ef0d7d6b7fa97209d79713ff Assembly-CSharp.dll:.RanchnManager
+266cc1eb5cc71f1cba49e1d5027822ff Assembly-CSharp.dll:.RanchnManager
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 a6a04d452c9e452dc3a7792174b10142 Assembly-CSharp.dll:.PutOnSlot
 e50ddbc3c3d88583779b52f01367c261 Assembly-CSharp.dll:.ScrollUV
-2a0f1b20a4d8b384bb377aec378c706f Assembly-CSharp.dll:.PlayerAct
+b729237075b05f876ede372a98f00c48 Assembly-CSharp.dll:.PlayerAct
+2381e5b7e6748de834f5d6e8d895f10b Assembly-CSharp.dll:.WeaponAttack
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 88c0c0d93b54d37a84150a42239b56ed Assembly-CSharp-firstpass.dll:Cinemachine.CinemachineBrain
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.QuestAcceptPanel

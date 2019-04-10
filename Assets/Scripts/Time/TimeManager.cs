@@ -3,20 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class TimeManager : MonoBehaviour {
-    private static TimeManager mInstance;
-    public static TimeManager Instance
-    {
-        get
-        {
-            if (mInstance == null)
-            {
-                mInstance = GameObject.FindGameObjectWithTag("Manager").GetComponent<TimeManager>();
-            }
-            return mInstance;
-        }
-    }
-    
+public class TimeManager : MonoSingleton<TimeManager> {
+
 
     private float mCurrentTime = 0;
     private int mOneDayTime = 600;
@@ -40,9 +28,6 @@ public class TimeManager : MonoBehaviour {
 
     public void NewDay()
     {
-
-        //Debug.Log(IsInvoking());
-        //CancelInvoke();
         mDay++;
         GameEventManager.Instance.NotifySubject(GameEventType.NewDay);
         mCurrentTime = 0;
@@ -59,15 +44,12 @@ public class TimeManager : MonoBehaviour {
                 mMonthStr = "雪";
             }
         }
-        
         string timemsg = mMonthStr + "    " + mDay.ToString() + "日    " + mDayNight;
         TimePanel.Instance.ShowTimeInfo(timemsg);
-        //InvokeRepeating("UpdateTime", 0, 1);
     }
 
     public void UpdateTime()
     {
-        
         mCurrentTime++;
         if (mCurrentTime / (mOneDayTime/2) < 1)
         {

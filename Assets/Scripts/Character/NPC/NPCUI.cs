@@ -43,7 +43,7 @@ public class NPCUI :MonoBehaviour
             RandomMove();
         }
         float randomTime = Random.Range(0, 3);
-        //InvokeRepeating("ShowHUDText", randomTime, 3);
+        InvokeRepeating("ShowHUDText", randomTime, 3);
     }
 
 
@@ -203,7 +203,9 @@ public class NPCUI :MonoBehaviour
 
     public void ShowHUDText()
     {
+        if (transform.parent.parent. gameObject.activeSelf == false) return;
         if (NPCtype == NPCInfo.NPCType.Normal) return;
+        
         GameObject go = Instantiate(HUDPrefab, HUDPanel, false);
         
         int randomnum = Random.Range(0, NPCinfo.HUDText.Count);

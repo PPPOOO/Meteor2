@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\GameEvent\Observes\IGameEventObserves.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Observes\NewDayObserves\NewDayObserverBusinessManager.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Observes\NewDayObserves\NewDayObserverCropManager.cs" />
+    <Compile Include="Assets\Scripts\GameEvent\Observes\NewDayObserves\NewDayObserverRanch.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Subject\IGameEventSubject.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Subject\ItemGetSubject.cs" />
     <Compile Include="Assets\Scripts\GameEvent\Subject\NewDaySubject.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Assets\Scripts\UI\Item\ToolTip.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\BasePanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\ConfirmPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\NoSlotPanel\EscPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\HEMEXPPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\MiniMapPanel.cs" />
     <Compile Include="Assets\Scripts\UI\NoSlotPanel\NPCTalkContentPanel.cs" />

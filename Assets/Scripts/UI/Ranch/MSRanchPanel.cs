@@ -29,17 +29,17 @@ public class MSRanchPanel : BasePanel<MSRanchPanel>
             Hide();
             });
 
-        mWaterBtn.onClick.AddListener(() => CropManager.Instance.WaterCrop());
-        mFertilizeBtn.onClick.AddListener(() => CropManager.Instance.FertilizeCrop());
-        mHarvestBtn.onClick.AddListener(() => CropManager.Instance.HarvestCrop());
+        mWaterBtn.onClick.AddListener(() => RanchnManager.Instance.AllPacify());
+        mFertilizeBtn.onClick.AddListener(() => RanchnManager.Instance.AllFeed());
+        mHarvestBtn.onClick.AddListener(() => RanchnManager.Instance.Allharvest());
         UpdateEP();
     }
 
     void UpdateEP()
     {
-        mWaterEP.text = CropManager.Instance.WaterEP.ToString();
-        mFertilizeEP.text = CropManager.Instance.FertilizeEP.ToString();
-        mHarvestEP.text = CropManager.Instance.HarvestEP.ToString();
+        mWaterEP.text = RanchnManager.Instance.GetPacifyEP().ToString();
+        mFertilizeEP.text = RanchnManager.Instance.GetFeedEP().ToString();
+        mHarvestEP.text = RanchnManager.Instance.GetHarvestEP().ToString();
     }
 
     public override void Show()

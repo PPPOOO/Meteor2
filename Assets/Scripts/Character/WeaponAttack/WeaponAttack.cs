@@ -26,14 +26,11 @@ public class WeaponAttack : MonoBehaviour
     {
         PolygonCollider2D = GetComponent<PolygonCollider2D>();
         PS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        SetStartPos();
     }
 
     private void Update()
     {
-        if (IsSetStartPos == false)
-        {
-            SetStartPos();
-        }
         RotateSpeed = (100 / RotateTime);
         transform.Rotate(Vector3.forward, RotateSpeed * Time.deltaTime);
 

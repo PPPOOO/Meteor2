@@ -3,7 +3,7 @@
         "id": 101,
         "name": "快速攻击",
         "sprite": "Sprites/Skill/skill-101",
-        "des": "攻击速度加快100%，并持续回血",
+        "des": "攻击速度加快200%，并持续回血",
         "mp": 10,
         "ep": 10,
         "coolTime": 10,
@@ -29,7 +29,7 @@
             {
                 "attrType": "AttackRate",
                 "time": 20,
-                "fixValue": 200
+                "fixValue": 2
             }
         ]
     },
@@ -66,7 +66,7 @@
             {
                 "attrType": "MoveSpeed",
                 "time": 3,
-                "fixValue": -50
+                "fixValue": -1
             }
         ]
     },

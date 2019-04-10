@@ -9,24 +9,17 @@ public class StartState : ISceneState
 
     }
 
-    private Image mLogo;
-    private float mSmoothingTime = 1;
-
-    private float mWaitTime = 0;
-
     public override void StateStart()
     {
-        mLogo = GameObject.Find("Logo").GetComponent<Image>();
-        mLogo.color = Color.black;
+        GameObject.FindGameObjectWithTag("Canvas").transform.Find("StartBtn").GetComponent<Button>().onClick.AddListener(OnStartButtonClick);
+        GameObject.FindGameObjectWithTag("Canvas").transform.Find("ExitBtn").GetComponent<Button>().onClick.AddListener(OnExitBtnClick);
     }
-
-    public override void StateUpDate()
+    public void OnStartButtonClick()
     {
-        mLogo.color = Color.Lerp(mLogo.color, Color.white, mSmoothingTime * Time.deltaTime);
-        mWaitTime -= Time.deltaTime;
-        if (mWaitTime <= 0)
-        {
-            mController.SetState(new MainMenuState(mController));
-        }
+        mController.SetState(new MainState(mController));
+    }
+    public void OnExitBtnClick()
+    {
+        Application.Quit();
     }
 }

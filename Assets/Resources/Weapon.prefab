@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14e15ee6eae97f429dda5e97410a010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateTime: 0.3
+  RotateTime: 0.21
   DestroyTime: 0
   weaponDir: 0
   RotateSpeed: 0

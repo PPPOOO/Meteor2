@@ -126,6 +126,11 @@ public class CropManager: MonoBehaviour
     {
         if (player.GetComponent<PlayerStatus>().TakeEP(HarvestEP))
         {
+            if (growCrops.Count == 0)
+            {
+                ToolTip.Instance.ShowForTimeInMousePosition("你根本没有可以收获的作物！！", 2);
+                return;
+            }
             for (int i = growCrops.Count - 1; i >=0 ; i--)
             {
                 growCrops[i].Harvest(1);

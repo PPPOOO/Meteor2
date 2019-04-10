@@ -48,7 +48,7 @@ public class EnemyStatus : CharacetStatus
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().GetExp(gameObject.GetComponent<EnemyStatus>().enemy.Exp);
             IsDead = true;
-            gameObject.GetComponent<EnemyStatus>().animator.SetBool("IsDead", true);
+            gameObject.GetComponent<EnemyStatus>().animator.SetBool("Dead", true);
             QuestManager.Instance.EnemyKilled(gameObject.GetComponent<EnemyStatus>());
             EnemyManager.Instance.enemyUIsList.Remove(this);
             Destroy(gameObject, 1f);

@@ -26,12 +26,16 @@ public class MapChangTrigger : MonoBehaviour
 
     IEnumerator ChangeMap(Collider2D col)
     {
-        Bg.DOFade(1, 0.5f);
-        yield return new WaitForSeconds(0.5f);
-        CurrentMap.gameObject.SetActive(false);
-        NextMap.gameObject.SetActive(true);
-        Bg.DOFade(0, 0.5f);
-        col.gameObject.transform.position = NextMapPos.position;
+        if (col.tag == "Player")
+        {
+
+            Bg.DOFade(1, 0.5f);
+            yield return new WaitForSeconds(0.5f);
+            CurrentMap.gameObject.SetActive(false);
+            NextMap.gameObject.SetActive(true);
+            Bg.DOFade(0, 0.5f);
+            col.gameObject.transform.position = NextMapPos.position;
+        }
     }
 
 }

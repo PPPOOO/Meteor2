@@ -46,6 +46,10 @@ public class InventoryManager : MonoBehaviour
             ChestPanel.Instance.StoreItem(id);
             
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EscPanel.Instance.DisplaySwitch();
+        }
         if (Input.GetKeyDown(KeyCode.B))
         {
             Bag_PutOnPanel.Instance.DisplaySwitch();
@@ -131,7 +135,6 @@ public class InventoryManager : MonoBehaviour
 
     public Item GetItemById(int id)
     {
-
         foreach (Item item in itemList)
         {
             if (item.ID == id)

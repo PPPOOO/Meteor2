@@ -18,16 +18,9 @@ public class RanchAnimalUI : MonoBehaviour
 
 
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
 
     public virtual void SetID(int id)
     {
-        Debug.Log(id);
         animator = GetComponent<Animator>();
         ID = id;
         RanchAnimalInfo = RanchnManager.Instance.GetRanchAnimalInfoByID(ID);
@@ -55,7 +48,9 @@ public class RanchAnimalUI : MonoBehaviour
         else
         {
             RanchHarvestChestPanel.Instance.StoreItem(InventoryManager.Instance.GetItemById(RanchAnimalInfo.ProductID));
+            RanchnManager.Instance.RanchAnimalUIGrowList.Remove(this);
             CurrentGrow = 0;
+
         }
     }
 
@@ -63,9 +58,8 @@ public class RanchAnimalUI : MonoBehaviour
     {
         if (CurrentGrow >= MaxGrow)
         {
-            //IsGrow = true;
-            //RanchnManager.Instance.AddGrowCrop(this);
-            //RanchnManager.Instance.RemoveCrop(this);
+            IsGrow = true;
+            RanchnManager.Instance.RanchAnimalUIGrowList.Add(this);
         }
     }
 

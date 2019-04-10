@@ -39,6 +39,7 @@ public class RanchAnimalItemChoice :MonoBehaviour,IPointerDownHandler
         OtherItemPanel.Instance.ReduceItem(ID);
         ChoiceRanchAnimalPanel.Instance.Hide();
         RanchnManager.Instance.CreatAnimalInRanch(ItemPet.PetID);
+
     }
 
 }

@@ -109,12 +109,12 @@ public class CharacetStatus : MonoBehaviour {
 
     public void AttackRateChange(int count)
     {
-        AttackRate *= ((float)(100 + count)) / 100;
+        AttackRate += count;
     }
 
 
     public void MoveSpeedChange(int count)
     {
-        MoveSpeed *=((float) (100 + count)) / 100;
+        MoveSpeed += count;
     }
 }
